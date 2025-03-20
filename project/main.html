@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure Spin</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/amy" rel="stylesheet">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/amy');
+
+        h1{
+            font-family: 'Amy', sans-serif;
+            
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: url(img/StartingScreen.jpg) no-repeat center center/cover;
+            background-size: 120%;
+            font-family: 'Playfair Display', serif;
+            color: black;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 0px;
+            margin-top: 0px;
+            margin-bottom: 40px;
+        }
+        .title {
+            font-size: 7rem;
+            margin-bottom: 35px;
+        }
+        .cards {
+            display: flex;
+            gap: 20px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.444);
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .card h2 {
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            margin-top: 70px;
+            margin-bottom: 0px;
+            letter-spacing: 0.5px; 
+            line-height: 1.6; 
+        }
+
+        .card div {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 10px;
+            margin-left: 200px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: 1s ease-in-out;
+        }
+        .card div:hover {
+            background-color: #e60000;
+            transform: scale(1.2);
+        }
+
+        a{
+            text-decoration: none;
+            color: #e60000;
+            font-family: 'Amy', sans-serif;
+            font-size: xxx-large;
+            animation: rainbow 2s infinite linear;
+            display: inline-block;
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        @keyframes rainbow {
+            0% { color: red; }
+            20% { color: orange; }
+            40% { color: yellow; }
+            60% { color: green; }
+            80% { color: blue; }
+            100% { color: red; }
+        }
+
+
+        a:hover{
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Adventure Spin</h1>
+        <div class="cards">
+            <div class="card">
+                <h2>Choose your Character</h2>
+                <p>Pick your favorite character and dive into the adventure! Unlock new characters by collecting coins and overcoming exciting challenges. Each character has a unique style—find the one that suits you best!</p>
+            </div>
+            <div class="card">
+                <h2>Random gifts and rewards</h2>
+                <p>Spin the daily lucky wheel and claim awesome rewards! Win coins or exclusive skins to customize your character. You never know what surprise awaits you!</p>
+            </div>
+            <div class="card">
+                <h2>Thrilling Levels & Challenges</h2>
+                <p>Jump, collect coins, and dodge dangerous obstacles! Complete levels to earn a spin on the special gambling machine for a chance to win even more coins. Only the best players can unlock them all!</p>
+                <div>How to?</div>
+            </div>
+        </div>
+
+        
+    </div>
+    <a href="html/charakterPage.html">Start Game</a>
+</body>
+</html>
