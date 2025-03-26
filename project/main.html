@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/amy" rel="stylesheet">
+    <script src="js/main.js" defer></script>
     <style>
         @import url('https://fonts.cdnfonts.com/css/amy');
 
@@ -117,12 +118,16 @@
             <div class="card">
                 <h2>Thrilling Levels & Challenges</h2>
                 <p>Jump, collect coins, and dodge dangerous obstacles! Complete levels to earn a spin on the special gambling machine for a chance to win even more coins. Only the best players can unlock them all!</p>
-                <div>How to?</div>
+                <div onclick="loadHowTo()">How to?</div>
             </div>
         </div>
 
         
     </div>
+
+    <!--HIdden How To, activate with Onclick-->
+    <div id="howToPage"></div>
+
     <!--Start to Charakter-->
     <a href="html/charakterPage.html">Start Game</a>
 </body>
