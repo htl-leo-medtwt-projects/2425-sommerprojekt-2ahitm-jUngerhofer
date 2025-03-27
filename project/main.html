@@ -25,7 +25,7 @@
             color: black;
             text-align: center;
         }
-        .container {
+        #container {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -104,7 +104,7 @@
 </head>
 <body>
     <!--Container für Infos + Interaktive Buttons -->
-    <div class="container">
+    <div id="container">
         <h1 class="title">Adventure Spin</h1>
         <div class="cards">
             <div class="card">
@@ -126,9 +126,37 @@
     </div>
 
     <!--HIdden How To, activate with Onclick-->
-    <div id="howToPage"></div>
+    <div id="howToPage">
+    <!-- How-To-Play Box (Standardmäßig versteckt) -->
+
+        <div id="howToContent">
+            <h1 id="howToTitle">How to play?</h1>
+            <p id="howToText">
+                Welcome to the ultimate collecting challenge! Your goal is simple: move the barrel left and right
+                to catch the right items while avoiding the wrong ones. Each level gets harder as more fake items drop
+                and the speed increases!
+            </p>
+            <h2>Main Gameplay 🏆</h2>
+            <ul>
+                <li>Move the barrel left and right to collect the correct items.</li>
+                <li>Avoid the wrong items—catching them will cost you points!</li>
+                <li>As you progress, more wrong items appear, and everything falls faster!</li>
+                <li>Complete levels to earn coins and unlock new characters!</li>
+            </ul>
+            <h2>Bonus Level 💰</h2>
+            <ul>
+                <li>Every few levels, you’ll enter a 15-second Bonus Round!</li>
+                <li>During this time, only coins fall—catch as many as you can!</li>
+                <li>Use your collected coins to unlock new skins for your character!</li>
+            </ul>
+            <p>Are you ready to test your reflexes and collect all the rewards? Start playing now!</p>
+            <button id="closeHowTo" onclick="closeHowTo()">Back</button>
+        </div>
+
+
+    </div>
 
     <!--Start to Charakter-->
-    <a href="html/charakterPage.html">Start Game</a>
+    <a href="html/charakterPage.html" id="startGame">Start Game</a>
 </body>
 </html>
