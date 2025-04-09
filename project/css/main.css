@@ -1,0 +1,91 @@
+/* Body fixieren & mittig */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden; /* Keine Scrollbar */
+    background-image: url(../img/backgroundInfos.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier New', monospace;
+  }
+  
+  /* Die Hauptbox */
+  #charakterBox {
+    background: #eee;
+    width: 600px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Obere Sektion */
+  #topSection {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Abstand zwischen Skin-Box und Info-Box */
+    margin-bottom: 20px; /* Abstand nach unten */
+  }
+  
+  #skinBox,
+  #infoBox {
+    background-color: red;
+    color: white;
+    width: 48%;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  #formSection {
+    background-color: red;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    overflow-y: auto; 
+    position: relative;
+    margin-top: 20px;
+  }
+  
+  
+  #formSection input[type="text"],
+  #formSection input[type="date"] {
+    margin-left: 10px;
+    padding: 5px;
+    width: 60%;
+    margin-bottom: 10px;
+  }
+  
+  #formSection label {
+    margin-top: 5px;
+  }
+  
+  #slider {
+    vertical-align: middle;
+    margin-left: 10px;
+  }
+  
+  #formSection button {
+    align-self: flex-end;
+    margin-top: 20px;
+    padding: 5px 10px;
+    background: #eee;
+    color: red;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  

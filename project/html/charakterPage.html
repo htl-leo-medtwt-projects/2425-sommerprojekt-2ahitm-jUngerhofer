@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MainPage</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/game.js" defer></script>
+</head>
+<body>
+    <div id="charakterBox">
+        <div id="topSection">
+          <div id="skinBox">NoSkin Img 🧍‍♂️</div>
+          <div id="infoBox">
+            <p>Coins: <span id="coinCount">0</span></p>
+            <p>Level: <span id="level">0</span></p>
+            <p>Daily Lucky Wheel: <span id="dailyWheel">unused</span></p>
+          </div>
+        </div>
+      
+        <div id="formSection">
+          <p>Name (Full Name): <input id="fullname" type="text" /></p>
+          <p>Birthdate: <input id="birthdate" type="date" /></p>
+          <p>Kreditkartennummer: <input id="cc" type="text" placeholder="XXXX XXXX XXXX XXXX" /></p>
+          <p>Nickname: <input id="nickname" type="text" /></p>
+      
+          <p>
+            Relevant Offers:
+            <button id="offersToggle">Off</button>
+          </p>
+          <p>
+            Sound:
+            <button id="soundToggle">Off</button>
+          </p>
+      
+          <p>Value: <span id="sliderVal">50</span>
+            <input id="slider" type="range" min="0" max="100" value="50" />
+          </p>
+      
+          <button id="nextBtn">next</button>
+        </div>
+      </div>
+      
+</body>
+</html>
