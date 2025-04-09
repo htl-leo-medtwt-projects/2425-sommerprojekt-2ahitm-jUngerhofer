@@ -18,31 +18,59 @@ document.getElementById('slider').oninput = (e) => {
   document.getElementById('sliderVal').innerText = e.target.value;
 };
 
+
+//function getData
 document.getElementById('nextBtn').onclick = () => {
-  let data = {
-    name: document.getElementById('fullname').value,
-    birthdate: document.getElementById('birthdate').value,
-    creditCard: document.getElementById('cc').value,
-    nickname: document.getElementById('nickname').value,
-    offers: offerOn,
-    sound: soundOn,
-    value: document.getElementById('slider').value,
-    coins,
-    level,
-    dailyUsed
-  };
-
-  localStorage.setItem('playerData', JSON.stringify(data)); // optional: speichern
-
-  console.log(data);
+    const name = document.getElementById('fullname');
+    const birth = document.getElementById('birthdate');
+    const credit = document.getElementById('cc');
+    const nick = document.getElementById('nickname');
   
-  // Hintergrund ändern
-  document.body.style.backgroundImage = "url('img/mapBackground.jpg')";
-  document.body.style.backgroundSize = "cover";
-
-  // Box ausblenden
-  document.getElementById('charakterBox').style.display = 'none';
-
-  // Map laden (ersetz das mit deiner Seite/Code)
-  window.location.href = "html/map.html";
-};
+    // Reset der Styles (alte Fehler entfernen)
+    [name, birth, credit, nick].forEach(input => input.style.border = 'none');
+  
+    // Leere Felder erfassen
+    const missingFields = [];
+  
+    if (!name.value.trim()) missingFields.push(name);
+    if (!birth.value.trim()) missingFields.push(birth);
+    if (!credit.value.trim()) missingFields.push(credit);
+    if (!nick.value.trim()) missingFields.push(nick);
+  
+    if (missingFields.length > 0) {
+      // Markiere fehlende Felder rot
+      missingFields.forEach(input => input.style.border = '2px solid red');
+  
+      // Zeige Popup mit Warnung
+      document.getElementById('popupOverlay').style.display = 'flex';
+      return; // Stoppe, nichts abspeichern!
+    }
+  
+    // ✅ Alles ausgefüllt → Daten erfassen
+    let data = {
+      name: name.value,
+      birthdate: birth.value,
+      creditCard: credit.value,
+      nickname: nick.value,
+      offers: offerOn,
+      sound: soundOn,
+      value: document.getElementById('slider').value,
+      coins,
+      level,
+      dailyUsed
+    };
+  
+    localStorage.setItem('playerData', JSON.stringify(data));
+  
+    // Weiterleitung vorbereiten
+    document.body.style.backgroundImage = "url('img/mapBackground.jpg')";
+    document.body.style.backgroundSize = "cover";
+    document.getElementById('charakterBox').style.display = 'none';
+  
+    window.location.href = "html/map.html";
+  };
+  
+  document.getElementById('closePopup').onclick = () => {
+    document.getElementById('popupOverlay').style.display = 'none';
+  };
+  

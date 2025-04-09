@@ -6,22 +6,34 @@
     <title>MainPage</title>
     <link rel="stylesheet" href="../css/main.css">
     <script src="../js/game.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <div id="charakterBox">
         <div id="topSection">
-          <div id="skinBox"> img </div>
+          <div id="skinBox"> <img src="../img/NoSkin/Run (1).png" alt=""></div>
           <div id="infoBox">
             <p>Coins: <span id="coinCount">0</span></p>
             <p>Level: <span id="level">0</span></p>
             <p>Daily Lucky Wheel: <span id="dailyWheel">unused</span></p>
           </div>
         </div>
+
+
+        <div id="popupOverlay" style="display: none;">
+            <div id="popupBox">
+              <span id="closePopup">✖</span>
+              <p>Please fill in all required fields before proceeding.</p>
+            </div>
+          </div>
+          
       
         <div id="formSection">
           <p>Name (Full Name): <input id="fullname" type="text" /></p>
           <p>Birthdate: <input id="birthdate" type="date" /></p>
-          <p>Kreditkartennummer: <input id="cc" type="text" placeholder="XXXX XXXX XXXX XXXX" /></p>
+          <p>Kreditcardnumber: <input id="cc" type="text" placeholder="XXXX XXXX XXXX XXXX" /></p>
           <p>Nickname: <input id="nickname" type="text" /></p>
       
           <p>
