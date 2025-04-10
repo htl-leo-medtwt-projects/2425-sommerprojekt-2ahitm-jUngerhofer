@@ -1,0 +1,30 @@
+@import url('https://fonts.cdnfonts.com/css/amy');
+
+body {
+  margin: 0;
+  font-family: 'Amy', sans-serif;
+  background: url('../img/mapBackground.jpg') no-repeat center center / cover;
+  color: black;
+}
+
+#navBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  font-size: 2rem;
+  font-weight: bold;
+
+}
+
+.nav-item {
+  cursor: pointer;
+  color: black;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  font-family: 'Amy', sans-serif;
+}
+
+
+.nav-item.active {
+  color: gold;
+  text-shadow: 0 0 10px gold, 0 0 20px goldenrod;
+}
