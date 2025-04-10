@@ -100,34 +100,51 @@
         a:hover{
             transform: scale(1.2);
         }
+
+        .character-space {
+            width: 300px;
+            height: 400px; 
+            background: none;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        
+        .character-space img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
     </style>
 </head>
 <body>
-    <!--Container für Infos + Interaktive Buttons -->
     <div id="container">
         <h1 class="title">Adventure Spin</h1>
         <div class="cards">
             <div class="card">
-                <h2>Choose your Character</h2>
-                <p>Pick your favorite character and dive into the adventure! Unlock new characters by collecting coins and overcoming exciting challenges. Each character has a unique style—find the one that suits you best!</p>
+              <h2>Choose your Character</h2>
+              <p>Pick your favorite character and dive into the adventure! Unlock new characters by collecting coins and overcoming exciting challenges. Each character has a unique style—find the one that suits you best!</p>
             </div>
+          
+            <div class="character-space">
+              
+            </div>
+          
             <div class="card">
-                <h2>Random gifts and rewards</h2>
-                <p>Spin the daily lucky wheel and claim awesome rewards! Win coins or exclusive skins to customize your character. You never know what surprise awaits you!</p>
+              <h2>Thrilling Levels & Challenges</h2>
+              <p>Jump, collect coins, and dodge dangerous obstacles! Complete levels to earn a spin on the special gambling machine for a chance to win even more coins. Only the best players can unlock them all!</p>
+              <div onclick="loadHowTo()">How to?</div>
             </div>
-            <div class="card">
-                <h2>Thrilling Levels & Challenges</h2>
-                <p>Jump, collect coins, and dodge dangerous obstacles! Complete levels to earn a spin on the special gambling machine for a chance to win even more coins. Only the best players can unlock them all!</p>
-                <div onclick="loadHowTo()">How to?</div>
-            </div>
-        </div>
-
-        
+          </div>
+           
     </div>
 
     <!--HIdden How To, activate with Onclick-->
     <div id="howToPage">
-    <!-- How-To-Play Box (Standardmäßig versteckt) -->
+    
 
         <div id="howToContent">
             <h1 id="howToTitle">How to play?</h1>
@@ -156,7 +173,7 @@
 
     </div>
 
-    <!--Start to Charakter-->
+
     <a href="html/charakterPage.html" id="startGame">Start Game</a>
 </body>
 </html>

@@ -5,7 +5,7 @@ body{
     background-size: cover;
 }
 
-/* Hintergrund für die How-To-Box */
+
 #howToPage {
     display: none; 
     position: fixed;
@@ -19,7 +19,7 @@ body{
     z-index: 1000;
 }
 
-/* Inhalt der Box */
+
 #howToContent {
     width: 60%;
     max-width: 700px;
@@ -30,25 +30,25 @@ body{
     text-align: center;
 }
 
-/* Titel */
+
 #howToTitle {
     font-size: 28px;
     font-weight: bold;
 }
 
-/* Text */
+
 #howToText {
     font-size: 16px;
     margin-bottom: 15px;
 }
 
-/* Liste */
+
 ul {
     text-align: left;
     margin-left: 20px;
 }
 
-/* Zurück-Button */
+
 #closeHowTo {
     background: red;
     color: white;

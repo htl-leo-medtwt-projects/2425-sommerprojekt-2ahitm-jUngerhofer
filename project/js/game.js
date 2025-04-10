@@ -26,10 +26,10 @@ document.getElementById('nextBtn').onclick = () => {
     const credit = document.getElementById('cc');
     const nick = document.getElementById('nickname');
   
-    // Reset der Styles (alte Fehler entfernen)
+    
     [name, birth, credit, nick].forEach(input => input.style.border = 'none');
   
-    // Leere Felder erfassen
+
     const missingFields = [];
   
     if (!name.value.trim()) missingFields.push(name);
@@ -38,15 +38,12 @@ document.getElementById('nextBtn').onclick = () => {
     if (!nick.value.trim()) missingFields.push(nick);
   
     if (missingFields.length > 0) {
-      // Markiere fehlende Felder rot
       missingFields.forEach(input => input.style.border = '2px solid red');
-  
-      // Zeige Popup mit Warnung
+
       document.getElementById('popupOverlay').style.display = 'flex';
-      return; // Stoppe, nichts abspeichern!
+      return; 
     }
   
-    // ✅ Alles ausgefüllt → Daten erfassen
     let data = {
       name: name.value,
       birthdate: birth.value,
@@ -62,12 +59,12 @@ document.getElementById('nextBtn').onclick = () => {
   
     localStorage.setItem('playerData', JSON.stringify(data));
   
-    // Weiterleitung vorbereiten
+    // Weiterleitung
     document.body.style.backgroundImage = "url('img/mapBackground.jpg')";
     document.body.style.backgroundSize = "cover";
     document.getElementById('charakterBox').style.display = 'none';
   
-    window.location.href = "html/map.html";
+    window.location.href = "../html/map.html";
   };
   
   document.getElementById('closePopup').onclick = () => {
