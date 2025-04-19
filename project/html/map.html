@@ -13,12 +13,129 @@
 </head>
 <body>
     <header id="navBar">
-        <span class="nav-item" id="shopBtn">Shop</span>
-        <span class="nav-item active" id="mapBtn">Map</span>
-        <span class="nav-item" id="charBtn">Character</span>
+        <span class="nav-item" id="shopBtn" onclick="openShop()">Shop</span>
+        <span class="nav-item active" id="mapBtn" onclick="openMap()">Map</span>
+        <span class="nav-item" id="charBtn" onclick="openCharacter()">Character</span>
     </header>
-      
 
+    <div id="sigmaShop">
+        <h2>Game Shop</h2>
+        <div class="shop-stats">
+            <div class="coins">Coins: <span id="playerCoins">0</span></div>
+        </div>
+        
+        <div class="shop-sections">
+            <div class="shop-section">
+                <h3>Skins</h3>
+                <div class="shop-items">
+                    <div class="shop-item" onclick="buySkin('warrior')">
+                        <img src="../assets/warrior_skin.png" alt="Warrior Skin">
+                        <h4>Warrior</h4>
+                        <div class="price">200 <span class="coin-icon">🪙</span></div>
+                        <button class="buy-btn">Purchase</button>
+                    </div>
+                    
+                    <div class="shop-item" onclick="buySkin('mage')">
+                        <img src="../assets/mage_skin.png" alt="Mage Skin">
+                        <h4>Mage</h4>
+                        <div class="price">300 <span class="coin-icon">🪙</span></div>
+                        <button class="buy-btn">Purchase</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="shop-section">
+                <h3>Lucky Wheel</h3>
+                <div class="lucky-wheel">
+                    <img src="../assets/wheel.png" alt="Lucky Wheel">
+                    <button class="spin-btn" onclick="spinWheel()">Spin (Free: <span id="freeSpins">1</span>)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <div id="sigmaMap">
+        <h2>Game Map</h2>
+        <div class="map-container">
+            <div class="level-box" id="level1" onclick="selectLevel(1)">
+                <h3>Level 1</h3>
+                <p>Beginner Challenge</p>
+                <div class="stars">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+            </div>
+            
+            <div class="level-box locked" id="level2" onclick="selectLevel(2)">
+                <h3>Level 2</h3>
+                <p>Advanced Skills</p>
+                <div class="stars">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+            </div>
+            
+            <div class="level-box locked" id="level3" onclick="selectLevel(3)">
+                <h3>Level 3</h3>
+                <p>Expert Challenge</p>
+                <div class="stars">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+            </div>
+            
+            <div class="level-box locked" id="level4" onclick="selectLevel(4)">
+                <h3>Level 4</h3>
+                <p>Master Skills</p>
+                <div class="stars">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+            </div>
+            
+            <div class="level-box locked" id="level5" onclick="selectLevel(5)">
+                <h3>Level 5</h3>
+                <p>Final Challenge</p>
+                <div class="stars">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sigmaCharacter">
+        <h2>Character Customization</h2>
+        
+        <div class="character-display">
+            <div class="character-preview">
+                <img id="characterPreview" src="../assets/default_character.png" alt="Character Preview">
+            </div>
+            
+            <div class="character-stats">
+                <h3>Player Stats</h3>
+                <div class="stat">Name: <span id="playerName">Player</span></div>
+                <div class="stat">Level: <span id="playerLevel">1</span></div>
+                <div class="stat">Experience: <span id="playerExp">0</span> / <span id="nextLevelExp">100</span></div>
+            </div>
+        </div>
+        
+        <div class="skin-selection">
+            <h3>Available Skins</h3>
+            <div class="skins-grid">
+                <div class="skin-option selected" onclick="changeSkin('default')">
+                    <img src="../assets/default_character.png" alt="Default Skin">
+                    <h4>Default</h4>
+                </div>
+                <!-- Other skins would be added when purchased -->
+            </div>
+        </div>
+    </div>
   
 </body>
 </html>
