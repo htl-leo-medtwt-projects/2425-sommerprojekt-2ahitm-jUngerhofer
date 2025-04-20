@@ -47,8 +47,38 @@
             <div class="shop-section">
                 <h3>Lucky Wheel</h3>
                 <div class="lucky-wheel">
-                    <img src="../assets/wheel.png" alt="Lucky Wheel">
-                    <button class="spin-btn" onclick="spinWheel()">Spin (Free: <span id="freeSpins">1</span>)</button>
+                    <!-- Ersetze den aktuellen img-Tag im Glücksrad mit diesem SVG: -->
+<div class="lucky-wheel">
+    <svg class="wheel-svg" viewBox="0 0 200 200" width="200" height="200">
+        <defs>
+            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+        <circle cx="100" cy="100" r="90" fill="url(#goldGradient)" stroke="black" stroke-width="3"/>
+        <circle cx="100" cy="100" r="10" fill="black"/>
+        <!-- Rad-Abschnitte -->
+        <line x1="100" y1="100" x2="100" y2="10" stroke="black" stroke-width="2"/>
+        <line x1="100" y1="100" x2="10" y2="100" stroke="black" stroke-width="2"/>
+        <line x1="100" y1="100" x2="100" y2="190" stroke="black" stroke-width="2"/>
+        <line x1="100" y1="100" x2="190" y2="100" stroke="black" stroke-width="2"/>
+        <line x1="100" y1="100" x2="30" y2="30" stroke="black" stroke-width="2"/>
+        <line x1="100" y1="100" x2="30" y2="170" stroke="black" stroke-width="2"/>
+        <line x1="100" y1="100" x2="170" y2="30" stroke="black" stroke-width="2"/>
+        <line x1="100" y1="100" x2="170" y2="170" stroke="black" stroke-width="2"/>
+        
+        <!-- Texte für die Preise -->
+        <text x="100" y="35" text-anchor="middle" fill="black" font-size="8" font-weight="bold">100 COINS</text>
+        <text x="35" y="100" text-anchor="middle" fill="black" font-size="8" font-weight="bold">50 COINS</text>
+        <text x="100" y="165" text-anchor="middle" fill="black" font-size="8" font-weight="bold">FREE SPIN</text>
+        <text x="165" y="100" text-anchor="middle" fill="black" font-size="8" font-weight="bold">10 COINS</text>
+        
+        <!-- Marker oben -->
+        <path d="M90,0 L100,10 L110,0 Z" fill="red"/>
+    </svg>
+    <button class="spin-btn" onclick="spinWheel()">Spin (Free: <span id="freeSpins">1</span>)</button>
+                </div>
                 </div>
             </div>
         </div>
@@ -62,8 +92,6 @@
                 <p>Beginner Challenge</p>
                 <div class="stars">
                     <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
                 </div>
             </div>
             
@@ -72,8 +100,6 @@
                 <p>Advanced Skills</p>
                 <div class="stars">
                     <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
                 </div>
             </div>
             
@@ -81,7 +107,6 @@
                 <h3>Level 3</h3>
                 <p>Expert Challenge</p>
                 <div class="stars">
-                    <span class="star">★</span>
                     <span class="star">★</span>
                     <span class="star">★</span>
                 </div>
@@ -137,5 +162,15 @@
         </div>
     </div>
   
+    <!--Error if not enough coins-->
+    <div id="coinErrorModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Nicht genug Münzen!</h3>
+            <p>Du hast nicht genug Münzen, um diesen Skin zu kaufen.</p>
+            <p>Spiele mehr Level oder drehe das Glücksrad, um mehr Münzen zu erhalten!</p>
+            <button class="modal-btn" onclick="closeModal()">OK</button>
+        </div>
+    </div>
 </body>
 </html>
