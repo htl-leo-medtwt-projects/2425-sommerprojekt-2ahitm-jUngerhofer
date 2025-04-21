@@ -7,8 +7,6 @@ body {
   background-repeat: no-repeat;
   overflow: hidden;
   background-size: 103vw;
-  bac
-  color: black;
 }
 
 #navBar {
@@ -44,7 +42,6 @@ body {
     display: none;
 }
 
-/* Level-Boxen für die Map */
 .map-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -206,7 +203,6 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* CSS für die Modal-Box */
 .modal {
     display: none;
     position: fixed;
@@ -286,7 +282,7 @@ body {
     to {transform: translateY(0); opacity: 1;}
 }
 
-/* Verbessere das Glücksrad */
+
 .lucky-wheel {
     display: flex;
     flex-direction: column;
@@ -309,7 +305,7 @@ body {
     to {transform: rotate(360deg);}
 }
 
-/* Sorge dafür, dass alle Bereiche sichtbar sind */
+
 #sigmaShop, #sigmaMap, #sigmaCharacter {
     max-height: calc(100vh - 80px);
     overflow-y: auto;
@@ -335,7 +331,7 @@ body {
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Character-Styles */
+
 #sigmaCharacter {
     padding: 30px;
     color: black;

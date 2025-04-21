@@ -72,7 +72,6 @@ function saveGameData() {
 
 // Update UI with current game data
 function updateUI() {
-    // Update player info
     document.getElementById("playerName").textContent = gameData.playerName;
     document.getElementById("playerLevel").textContent = gameData.level;
     document.getElementById("playerExp").textContent = gameData.experience;
@@ -90,14 +89,12 @@ function updateUI() {
         }
     }
     
-    // Update character skin
     document.getElementById("characterPreview").src = "../assets/" + gameData.currentSkin + "_character.png";
 }
 
 // Select a level
 function selectLevel(levelNum) {
     if (gameData.unlockedLevels.includes(levelNum)) {
-        // Here you would redirect to the actual level page
         console.log("Starting level " + levelNum);
         window.location.href = "level" + levelNum + ".html";
     } else {
@@ -105,26 +102,6 @@ function selectLevel(levelNum) {
     }
 }
 
-// Buy a skin
-function buySkin(skinName) {
-    const skinPrices = {
-        "warrior": 200,
-        "mage": 300
-    };
-    
-    if (gameData.coins >= skinPrices[skinName]) {
-        gameData.coins -= skinPrices[skinName];
-        gameData.ownedSkins.push(skinName);
-        saveGameData();
-        updateUI();
-        alert("Skin purchased successfully!");
-        
-        // Add the skin to character page
-        addSkinToSelection(skinName);
-    } else {
-        alert("Not enough coins!");
-    }
-}
 
 // Add skin to selection
 function addSkinToSelection(skinName) {
@@ -161,40 +138,6 @@ function changeSkin(skinName) {
     }
 }
 
-// Spin the wheel
-function spinWheel() {
-    if (gameData.freeSpins > 0) {
-        gameData.freeSpins--;
-        
-        // Random prize
-        const prizes = [
-            { name: "10 Coins", value: 10, type: "coins" },
-            { name: "50 Coins", value: 50, type: "coins" },
-            { name: "100 Coins", value: 100, type: "coins" },
-            { name: "Free Spin", value: 1, type: "spin" }
-        ];
-        
-        const randomPrize = prizes[Math.floor(Math.random() * prizes.length)];
-        
-        // Simulate wheel spin animation
-        alert("Spinning the wheel...");
-        
-        setTimeout(() => {
-            if (randomPrize.type === "coins") {
-                gameData.coins += randomPrize.value;
-                alert(`You won ${randomPrize.value} coins!`);
-            } else if (randomPrize.type === "spin") {
-                gameData.freeSpins += randomPrize.value;
-                alert(`You won a free spin!`);
-            }
-            
-            saveGameData();
-            updateUI();
-        }, 1000);
-    } else {
-        alert("No free spins left! Complete levels to earn more spins.");
-    }
-}
 
 // Initialize game
 window.onload = function() {
@@ -202,7 +145,6 @@ window.onload = function() {
     openMap(); // Start with map view
 };
 
-// Füge diese Funktionen zu deiner map.js-Datei hinzu
 
 // Modal öffnen
 function openModal() {
@@ -224,7 +166,7 @@ window.addEventListener("click", function(event) {
     }
 });
 
-// Ändere die buySkin-Funktion
+
 function buySkin(skinName) {
     const skinPrices = {
         "warrior": 200,
@@ -241,12 +183,11 @@ function buySkin(skinName) {
         // Add the skin to character page
         addSkinToSelection(skinName);
     } else {
-        // Statt alert, öffne das Modal
         openModal();
     }
 }
 
-// Verbesserte spinWheel-Funktion mit Animation
+
 function spinWheel() {
     if (gameData.freeSpins > 0) {
         gameData.freeSpins--;
@@ -270,7 +211,7 @@ function spinWheel() {
         
         const randomPrize = prizes[Math.floor(Math.random() * prizes.length)];
         
-        // Zeige spinnende Animation und dann Ergebnis
+        
         document.querySelector(".spin-btn").disabled = true;
         document.querySelector(".spin-btn").textContent = "Spinning...";
         
