@@ -408,6 +408,7 @@ function updateCharacterFrame() {
                     
                     // beenden wenn spins 0 ergeben
                     if (spinsLeft <= 0) {
+                        completeLevel(); //wenn alle spins fertig sind weird das Spiel ebenso auf erfolgreich geranked
                         setTimeout(endGame, 2000);
                     }
                 }
@@ -475,12 +476,17 @@ function updateCharacterFrame() {
             const lifePoints = lives * 3;
             const itemPoints = itemCount * 0.5;
             
-            // Erfahrung zwischen 1 und 20 begrenzen da man pro spiel max 20 erfahrung erhalten kann, da es 5 spiele gibt 
+            // Erfahrung zwischen 1 und 20 begrenzen!
             experience = Math.min(20, Math.max(1, Math.floor(timePoints + lifePoints + itemPoints)));
             
             // Erfahrung zum localStorage hinzufügen
             const storedXP = localStorage.getItem("playerXP") || "0";
             localStorage.setItem("playerXP", parseInt(storedXP) + experience);
+            
+            // Markiere das Level als abgeschlossen, wenn genügend Items gesammelt wurden
+            if (itemCount >= 15) {
+                completeLevel(); 
+            }
             
             // Game Over Anzeige anzeigen
             document.getElementById("finalScore").textContent = `Items gesammelt: ${itemCount}/15`;
@@ -535,11 +541,23 @@ function updateCharacterFrame() {
             requestAnimationFrame(gameLoop);
         }
         
+        function completeLevel() {
+            // Extrahiere die Level-Nummer aus der URL
+            const pathSegments = window.location.pathname.split('/');
+            const gameFolder = pathSegments[pathSegments.length - 2]; // z.B. "game1"
+            const levelNumber = parseInt(gameFolder.replace('game', '')) || 1;
+            
+            // Markieren das das Level erfolgreich weurd
+            localStorage.setItem(`level${levelNumber}Completed`, 'true');
+            
+            console.log(`Level ${levelNumber} als abgeschlossen markiert!`);
+        }
+
         // Startanimation und Spiel initialisieren
         window.onload = function() {
             animateStartScreen();
             
-            // Prüfen, ob bereits Werte im localStorage vorhanden sind
+            // Prüfen bei bereits Werte im localStorage vorhanden sind
             if (!localStorage.getItem("playerCoins")) {
                 localStorage.setItem("playerCoins", "0");
             }

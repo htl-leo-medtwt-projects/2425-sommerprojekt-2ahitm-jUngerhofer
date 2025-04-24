@@ -238,3 +238,30 @@ function spinWheel() {
         alert("No free spins left! Complete levels to earn more spins.");
     }
 }
+
+function checkLevelProgress() {
+    // Prüfe, ob ein Level im localStorage als abgeschlossen markiert wurde
+    for (let i = 1; i <= 5; i++) {
+        if (localStorage.getItem(`level${i}Completed`) === 'true') {
+            // Wenn das Level abgeschlossen wurde und noch nicht in unlockedLevels ist
+            if (!gameData.unlockedLevels.includes(i)) {
+                gameData.unlockedLevels.push(i);
+            }
+            
+            // Schalte das nächste Level frei, wenn es das letzte Level ist
+            if (i < 5 && !gameData.unlockedLevels.includes(i+1)) {
+                gameData.unlockedLevels.push(i+1);
+            }
+        }
+    }
+    
+    saveGameData();
+    
+    updateUI();
+}
+
+window.onload = function() {
+    loadGameData();
+    checkLevelProgress(); 
+    openMap(); 
+};
