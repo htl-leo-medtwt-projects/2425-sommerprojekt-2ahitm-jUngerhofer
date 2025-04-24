@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sammelspiel</title>
+    <!-- GSAP-Bibliothek -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="game.css">
+    <script src="game.js" defer></script>
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="startScreen">
+            <h1>Level 1 - Mytic Woods</h1>
+            <p class="subtitle">Sammle die Items und gewinne Münzen!</p>
+            <button class="startButton" onclick="startGame()">start</button>
+            <div id="controls"></div>
+        </div>
+        
+        <div id="entryPhase">
+            <div id="character"></div>
+            <div id="levelEntrance"></div>
+            <div id="controls"></div>
+        </div>
+        
+        <div id="gameScreen">
+            <div id="character"></div>
+            <div id="basket"></div>
+            <div id="score">Items: 0/15</div>
+            <div id="lives">Leben: 3</div>
+            <div id="coins">Münzen: 0</div>
+            <div id="experience">XP: 0</div>
+            <div id="timer">Zeit: 60</div>
+            <div id="controls">
+                Steuerung: Pfeiltasten oder WASD
+            </div>
+        </div>
+        
+        <div id="gamblingMachine">
+            <h2>Glücksspielautomat</h2>
+            <div class="slotContainer">
+                <div class="slot" id="slot1">?</div>
+                <div class="slot" id="slot2">?</div>
+                <div class="slot" id="slot3">?</div>
+            </div>
+            <button id="gambleButton" onclick="spin()">Drehen</button>
+            <p id="winnings"></p>
+            <p id="spinsLeft">Versuche übrig: 5</p>
+        </div>
+        
+        <div id="gameOver">
+            <h2>Spiel beendet!</h2>
+            <p id="finalScore">Items gesammelt: 0/15</p>
+            <p id="finalCoins">Münzen gesammelt: 0</p>
+            <p id="finalExperience">Erfahrung erhalten: 0</p>
+            <button id="restartButton" onclick="restartGame()">Neu starten</button>
+        </div>
+    </div>
+</body>
+</html>

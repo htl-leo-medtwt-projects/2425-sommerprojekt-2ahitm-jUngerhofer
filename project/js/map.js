@@ -49,10 +49,10 @@ let gameData = {
     playerName: "Player",
     level: 1,
     experience: 0,
-    coins: 100,
+    coins: 150,
     unlockedLevels: [1],
-    ownedSkins: ["default"],
-    currentSkin: "default",
+    ownedSkins: ["NoSkin"],
+    currentSkin: "NoSkin",
     freeSpins: 1
 };
 
@@ -89,14 +89,14 @@ function updateUI() {
         }
     }
     
-    document.getElementById("characterPreview").src = "../assets/" + gameData.currentSkin + "_character.png";
+    document.getElementById("characterPreview").src = "../img/" + gameData.currentSkin + "/Run1.png";
 }
 
 // Select a level
 function selectLevel(levelNum) {
     if (gameData.unlockedLevels.includes(levelNum)) {
         console.log("Starting level " + levelNum);
-        window.location.href = "level" + levelNum + ".html";
+        window.location.href = "../game" + levelNum + "/game.html";
     } else {
         alert("Level locked! Complete previous levels first.");
     }
@@ -146,20 +146,20 @@ window.onload = function() {
 };
 
 
-// Modal öffnen
+//fehlermeldung falls coins gering sind
 function openModal() {
     document.getElementById("coinErrorModal").style.display = "block";
 }
 
-// Modal schließen
+// fehler schließen
 function closeModal() {
     document.getElementById("coinErrorModal").style.display = "none";
 }
 
-// Schließen des Modals beim Klick auf X
+// Schließen des fehlers beim Klick auf X
 document.querySelector(".close-modal").addEventListener("click", closeModal);
 
-// Schließen des Modals beim Klick außerhalb
+// Schließen der fehlermeldung beim Klick außerhalb
 window.addEventListener("click", function(event) {
     if (event.target == document.getElementById("coinErrorModal")) {
         closeModal();
@@ -205,8 +205,8 @@ function spinWheel() {
         const prizes = [
             { name: "10 Coins", value: 10, type: "coins" },
             { name: "50 Coins", value: 50, type: "coins" },
-            { name: "100 Coins", value: 100, type: "coins" },
-            { name: "Free Spin", value: 1, type: "spin" }
+            { name: "200 Coins", value: 200, type: "coins" },
+            { name: "3 Free Spin", value: 3, type: "spin" }
         ];
         
         const randomPrize = prizes[Math.floor(Math.random() * prizes.length)];
@@ -225,7 +225,7 @@ function spinWheel() {
                 alert(`You won ${randomPrize.value} coins!`);
             } else if (randomPrize.type === "spin") {
                 gameData.freeSpins += randomPrize.value;
-                alert(`You won a free spin!`);
+                alert(`You won 3 free spin!`);
             }
             
             // UI und Button wiederherstellen
