@@ -240,6 +240,8 @@ function updateCharacterFrame() {
             basket.style.left = character.style.left;
             basket.style.bottom = "60px";
             
+            updateExperienceDisplay();
+
             // Timer 
             startTime = Date.now();
             timerInterval = setInterval(updateTimer, 1000);
@@ -487,6 +489,8 @@ function updateCharacterFrame() {
             if (itemCount >= 15) {
                 completeLevel(); 
             }
+
+            updatePlayerProgress();
             
             // Game Over Anzeige anzeigen
             document.getElementById("finalScore").textContent = `Items gesammelt: ${itemCount}/15`;
@@ -496,6 +500,33 @@ function updateCharacterFrame() {
             document.getElementById("gameOver").style.display = "block";
         }
         
+        function updateExperienceDisplay() {
+            document.getElementById("experience").textContent = `XP: ${experience}/20`;
+        }
+        
+        function updatePlayerProgress() {
+            let gameData = JSON.parse(localStorage.getItem('gameData') || '{}');
+            
+            if (!gameData.coins) gameData.coins = 0;
+            if (!gameData.experience) gameData.experience = 0;
+            if (!gameData.level) gameData.level = 1;
+            
+            // Münzen und Erfahrung aktualisieren
+            gameData.coins += coinCount;
+            gameData.experience += experience;
+                      
+            const expNeededForNextLevel = gameData.level * 100;
+            if (gameData.experience >= expNeededForNextLevel) {
+                gameData.level += 1;
+                // Optional: Benachrichtigung über Level-Up
+                alert(`Level aufgestiegen! Du bist jetzt Level ${gameData.level}!`);
+            }
+            
+            localStorage.setItem('gameData', JSON.stringify(gameData));
+            
+            console.log(`Fortschritt aktualisiert: Level ${gameData.level}, XP ${gameData.experience}, Münzen ${gameData.coins}`);
+        }
+
         // Spiel neu starten
         function restartGame() {
             // Alles zurücksetzen

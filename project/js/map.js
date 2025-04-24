@@ -72,6 +72,7 @@ function saveGameData() {
 
 // Update UI with current game data
 function updateUI() {
+    // Spielerdaten anzeigen
     document.getElementById("playerName").textContent = gameData.playerName;
     document.getElementById("playerLevel").textContent = gameData.level;
     document.getElementById("playerExp").textContent = gameData.experience;
@@ -84,12 +85,26 @@ function updateUI() {
         const levelBox = document.getElementById("level" + i);
         if (gameData.unlockedLevels.includes(i)) {
             levelBox.classList.remove("locked");
+            
+            if (localStorage.getItem(`level${i}Completed`) === 'true') {
+                levelBox.classList.add("completed");
+                
+                if (!levelBox.querySelector('.completed-icon')) {
+                    const completedIcon = document.createElement('div');
+                    completedIcon.className = 'completed-icon';
+                    completedIcon.innerHTML = '✓';
+                    levelBox.appendChild(completedIcon);
+                }
+            }
         } else {
             levelBox.classList.add("locked");
         }
     }
     
-    document.getElementById("characterPreview").src = "../img/" + gameData.currentSkin + "/Run1.png";
+    const characterPreview = document.getElementById("characterPreview");
+    if (characterPreview) {
+        characterPreview.src = `../img/${gameData.currentSkin}/Run (8).png`;
+    }
 }
 
 // Select a level
