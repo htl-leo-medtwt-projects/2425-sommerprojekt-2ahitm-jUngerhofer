@@ -185,7 +185,7 @@ window.addEventListener("click", function(event) {
     }
 });
 
-
+//TODO:  BOX LÖSCHEN done
 function buySkin(skinName) {
     const skinPrices = {
         "warrior": 200,
@@ -199,6 +199,12 @@ function buySkin(skinName) {
         updateUI();
         alert("Skin purchased successfully!");
         
+        if(skinName == "warrior"){
+            document.getElementById("warrior").style.display = "none";
+        }else{
+            document.getElementById("mage").style.display = "none";
+        }
+
         // Add the skin to character page
         addSkinToSelection(skinName);
     } else {
