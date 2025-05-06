@@ -281,3 +281,9 @@ function checkLevelProgress() {
 
 console.log("Available levels: ", gameData.unlockedLevels);
 
+function resetGame() {
+    if (confirm("Bist du sicher, dass du den Spielstand löschen möchtest? Das kann nicht rückgängig gemacht werden.")) {
+        localStorage.clear(); // Alles löschen
+        window.location.href = '../main.html'; // Zurück zur Startseite
+    }
+}
