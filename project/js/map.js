@@ -39,11 +39,6 @@ function openCharacter() {
     document.getElementById("charBtn").classList.add("active");
 }
 
-
-window.onload = function() {
-    openMap();
-};
-
 // Game data
 let gameData = {
     playerName: "Player",
@@ -55,6 +50,22 @@ let gameData = {
     currentSkin: "NoSkin",
     freeSpins: 1
 };
+
+window.onload = function() {
+    loadGameData();
+    checkLevelProgress();
+    updateUI();
+    
+    // Skins anzeigen
+    gameData.ownedSkins.forEach(skin => {
+        if (skin !== "NoSkin") {
+            addSkinToSelection(skin);
+        }
+    });
+
+    openMap(); // Map-Ansicht standardmäßig öffnen
+};
+
 
 // Load game data from localStorage if exists
 function loadGameData() {
@@ -73,7 +84,7 @@ function saveGameData() {
 // Update UI with current game data
 function updateUI() {
     // Spielerdaten anzeigen
-    document.getElementById("playerName").textContent = gameData.playerName;
+    document.getElementById("playerName").textContent= gameData.playerName;
     document.getElementById("playerLevel").textContent = gameData.level;
     document.getElementById("playerExp").textContent = gameData.experience;
     document.getElementById("nextLevelExp").textContent = gameData.level * 100;
@@ -103,7 +114,7 @@ function updateUI() {
     
     const characterPreview = document.getElementById("characterPreview");
     if (characterPreview) {
-        characterPreview.src = `../img/${gameData.currentSkin}/Run (8).png`;
+        characterPreview.src = `../img/${gameData.currentSkin}/Run8.png`;
     }
 }
 
@@ -152,13 +163,6 @@ function changeSkin(skinName) {
         });
     }
 }
-
-
-// Initialize game
-window.onload = function() {
-    loadGameData();
-    openMap(); // Start with map view
-};
 
 
 //fehlermeldung falls coins gering sind
@@ -263,20 +267,17 @@ function checkLevelProgress() {
                 gameData.unlockedLevels.push(i);
             }
             
-            // Schalte das nächste Level frei, wenn es das letzte Level ist
             if (i < 5 && !gameData.unlockedLevels.includes(i+1)) {
                 gameData.unlockedLevels.push(i+1);
             }
         }
     }
     
+    
     saveGameData();
     
     updateUI();
 }
 
-window.onload = function() {
-    loadGameData();
-    checkLevelProgress(); 
-    openMap(); 
-};
+console.log("Available levels: ", gameData.unlockedLevels);
+

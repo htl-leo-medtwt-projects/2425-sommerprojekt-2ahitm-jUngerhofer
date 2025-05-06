@@ -89,6 +89,7 @@ h1 {
     left: 50%;
     width: 60px;
     height: 100px;
+    padding-left: 30px;
     background-image: url('../img/NoSkin/Run\ \(1\).png'); 
     background-size: contain; 
     background-repeat: no-repeat;
@@ -98,10 +99,11 @@ h1 {
 
 #basket {
     position: absolute;
-    width: 80px;
-    height: 40px;
-    background-image: url('../img/basketWald.webp');
-    bottom: 60px;
+    width: 100px;
+    height: 60px;
+    background-image: url('../img/fass.jpg');
+    background-size: cover;
+    bottom: 100px;
     display: none;
 }
 
