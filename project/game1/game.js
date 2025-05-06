@@ -10,7 +10,7 @@ let characterPos = { x: 400, y: 100 };
         let items = [];
         let keyState = {};
         let gamePhase = "start"; // start -> entry -> game -> gambling -> gameOver
-        let characterFrames = Array(8).fill(null); 
+        let characterFrames = Array(7).fill(null); 
         let spinsLeft = 5;
         let gameTime = 60; 
         let timerInterval;
@@ -189,7 +189,7 @@ let characterPos = { x: 400, y: 100 };
         
     
 let animationCounter = 0;
-const animationSpeed = 20; 
+const animationSpeed = 10; 
 
 
 function updateCharacterFrame() {
