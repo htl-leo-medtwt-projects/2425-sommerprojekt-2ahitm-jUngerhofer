@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Spiel</title>
+    <link rel="stylesheet" href="game.css">
+    <script src="game.js" defer></script>
+</head>
+<body>
+    <div id="start-screen">
+        <h1 style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); margin-bottom: 50px; font-size: 42px;">Card Chaos</h1>
+        <div class="play-button-container" id="play-button" style="background-image: url(../img/CardChaos.png);">
+            <h2>Tauche ein in das Karten Chaos </h2>
+            <p>Level 1 hast du gut gemeistert, doch schaffst du Level 2?</p>
+            <h2>Zeige es!</h2>
+            <div class="play-button" style="margin-top: 3%;">
+                <div class="play-icon"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="rules-container">
+        <div class="close-button" id="close-rules">✖</div>
+        <h2>Card Chaos:</h2>
+        <ul>
+            <li>Finde alle 10 Kartenpaare</li>
+            <li>Du hast nur 2 Minute Zeit</li>
+            <li>Klicke auf eine Karte, um sie umzudrehen</li>
+            <li>Wenn du ein Paar findest, verschwinden die Karten</li>
+            <li>Pro Karte gibt es Münzen</li>
+            <li>Am ende öffnet sich der Gambling-Automat für extra Belohnungen</li>
+        </ul>
+        <button id="start-game" style="padding: 10px 20px; background-color: green; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 15px;">Spiel starten</button>
+    </div>
+
+    <div id="game-container">
+        <div id="timer">02:00</div>
+        <div id="game-board"></div>
+    </div>
+
+    <div id="game-over-container">
+        <h2 id="game-over-message"></h2>
+        <p id="game-over-stats"></p>
+        <button id="restart-button">Nochmal spielen</button>
+    </div>
+</body>
+</html>
