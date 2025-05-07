@@ -63,9 +63,15 @@ window.onload = function() {
         }
     });
 
+    const hasSpun = localStorage.getItem('hasSpun');
+    const spinButton = document.getElementById('spinButton');
+    if (hasSpun && spinButton) {
+      spinButton.disabled = true;
+      spinButton.textContent = 'Bereits gedreht';
+    }
+
     openMap(); // Map-Ansicht standardmäßig öffnen
 };
-
 
 // Load game data from localStorage if exists
 function loadGameData() {
@@ -213,7 +219,10 @@ function buySkin(skinName) {
 }
 
 
+//funktioniert nicht
+
 function spinWheel() {
+    window.location.href = "../html/wheel.html";
     if (gameData.freeSpins > 0) {
         gameData.freeSpins--;
         

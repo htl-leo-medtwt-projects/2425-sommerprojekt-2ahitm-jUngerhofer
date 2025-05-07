@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Glücksrad</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+    background-image: url(../img/characterImg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    }
+
+    .wheel-container {
+    text-align: center;
+    }
+
+    #wheelCanvas {
+    border: 5px solid #333;
+    border-radius: 50%;
+    background-color: #fff;
+    }
+
+    #spinButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    }
+
+    #spinButton:hover{
+        scale: 1.2;
+        background-color: #333;
+        color: #000;
+    }
+    
+  </style>
+  <script src="../js/wheel.js" defer></script>
+</head>
+<body>
+  <div class="wheel-container">
+    <canvas id="wheelCanvas" width="500" height="500"></canvas>
+    <div id="spinButton">Drehen</div>
+  </div>
+  
+</body>
+</html>
