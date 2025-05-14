@@ -178,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isWin) {
             gameOverMessage.textContent = "Glückwunsch! Du hast gewonnen!";
             gameOverStats.textContent = `Gefundene Paare: ${pairsFound}/10 | Verbleibende Zeit: ${formatTime(timeLeft)} | Züge: ${Math.ceil(totalFlips/2)}`;
+            completeLevel();
         } else {
             gameOverMessage.textContent = "Zeit abgelaufen!";
             gameOverStats.textContent = `Gefundene Paare: ${pairsFound}/10 | Züge: ${Math.ceil(totalFlips/2)}`;
@@ -186,10 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Neu starten
     restartButton.addEventListener('click', function() {
-        gameOverContainer.style.display = "none";
-        timerDisplay.style.color = "#e74c3c";
-        initGame();
-        startTimer();
+        window.location.href = "../html/map.html";
     });
     
     // Array mischen (Fisher-Yates-Algorithmus)
@@ -199,5 +197,17 @@ document.addEventListener('DOMContentLoaded', function() {
             [array[i], array[j]] = [array[j], array[i]];
         }
         return array;
+    }
+
+    function completeLevel() {
+        // Extrahiere die Level-Nummer aus der URL
+        const pathSegments = window.location.pathname.split('/');
+        const gameFolder = pathSegments[pathSegments.length - 2]; // z.B. "game1"
+        const levelNumber = parseInt(gameFolder.replace('game', '')) || 1;
+        
+        // Markieren das das Level erfolgreich weurd
+        localStorage.setItem(`level${levelNumber}Completed`, 'true');
+        
+        console.log(`Level ${levelNumber} als abgeschlossen markiert!`);
     }
 });

@@ -7,6 +7,7 @@ document.querySelectorAll('.nav-item').forEach(item => {
 
   
   function openShop() {
+    playSound("click");
     document.getElementById("sigmaShop").style.display = "block";
     document.getElementById("sigmaMap").style.display = "none";
     document.getElementById("sigmaCharacter").style.display = "none";
@@ -18,6 +19,7 @@ document.querySelectorAll('.nav-item').forEach(item => {
 }
 
 function openMap() {
+    playSound("click");
     document.getElementById("sigmaShop").style.display = "none";
     document.getElementById("sigmaMap").style.display = "block";
     document.getElementById("sigmaCharacter").style.display = "none";
@@ -29,6 +31,7 @@ function openMap() {
 }
 
 function openCharacter() {
+    playSound("click");
     document.getElementById("sigmaShop").style.display = "none";
     document.getElementById("sigmaMap").style.display = "none";
     document.getElementById("sigmaCharacter").style.display = "block";
@@ -130,13 +133,13 @@ function updateUI() {
     
     const characterPreview = document.getElementById("characterPreview");
     if (characterPreview) {
-        characterPreview.src = `../img/${gameData.currentSkin}/Run8.png`;
+        characterPreview.src = `../img/${gameData.currentSkin}/Run1.png`;
     }
 }
 
 // Select a level
 function selectLevel(levelNum) {
-    
+    playSound("click");
     if (gameData.unlockedLevels.includes(levelNum)) {
         playSound("click");
         console.log("Starting level " + levelNum);
@@ -151,6 +154,7 @@ function selectLevel(levelNum) {
 
 // Add skin to selection
 function addSkinToSelection(skinName) {
+    playSound("click");
     const skinsGrid = document.querySelector('.skins-grid');
     const skinDiv = document.createElement('div');
     skinDiv.className = 'skin-option';
@@ -173,7 +177,7 @@ function changeSkin(skinName) {
         saveGameData();
         
         // Update UI
-        document.getElementById("characterPreview").src = "../assets/" + skinName + "_character.png";
+        document.getElementById("characterPreview").src = "../img/" + skinName +"/Run8.png";
         
         // Update selection highlight
         const skinOptions = document.querySelectorAll('.skin-option');
@@ -244,7 +248,7 @@ window.addEventListener("click", function(event) {
 
 //TODO:  BOX LÖSCHEN done
 function buySkin(skinName) {
-    playSound("click");
+    
     const skinPrices = {
         "warrior": 200,
         "mage": 300
@@ -256,7 +260,7 @@ function buySkin(skinName) {
         saveGameData();
         updateUI();
         //alert("Skin purchased successfully!");
-        
+        playSound("click");
         if(skinName == "warrior"){
             document.getElementById("warrior").style.display = "none";
         }else{
@@ -268,6 +272,7 @@ function buySkin(skinName) {
     } else {
         //playSound("errorSound");
         openModal();
+        playSound("errorSound");
     }
 }
 
