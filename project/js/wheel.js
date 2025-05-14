@@ -50,7 +50,7 @@ function drawWheel() {
   ctx.closePath();
   ctx.fill();
 
-  if (gameData.freeSpins <= 0) {
+  if (gameData.freeSpins < 0) {
     setTimeout(() => {
       window.location.href = '../html/map.html';
     }, 2000);
@@ -58,9 +58,9 @@ function drawWheel() {
 }
 
 function spinWheel() {
-    if (isSpinning || gameData.freeSpins <= 0) return;
+    if (isSpinning || gameData.freeSpins < 0) return;
   
-    gameData.freeSpins -= 1;
+    //gameData.freeSpins -= 1;
     localStorage.setItem('gameData', JSON.stringify(gameData));
   
     isSpinning = true;

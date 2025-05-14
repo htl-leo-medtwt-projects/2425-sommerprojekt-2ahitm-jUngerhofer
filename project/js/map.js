@@ -40,16 +40,23 @@ function openCharacter() {
 }
 
 // Game data
+let skibidi = localStorage.getItem('playerData');
 let gameData = {
-    playerName: "Player",
+    playerName: localStorage.getItem("name"),
+    nickname: skibidi.nickname,
     level: 1,
     experience: 0,
     coins: 150,
     unlockedLevels: [1],
     ownedSkins: ["NoSkin"],
     currentSkin: "NoSkin",
-    freeSpins: 1
+    freeSpins: 1,
+    creditCardNumber: localStorage.getItem("creditCard"), 
+    soundOn: localStorage.getItem("sound")
 };
+
+
+
 
 window.onload = function() {
     loadGameData();
@@ -82,7 +89,7 @@ function loadGameData() {
     }
 }
 
-// Save game data to localStorage
+// Save game data to localStorage new gameData
 function saveGameData() {
     localStorage.setItem('gameData', JSON.stringify(gameData));
 }
@@ -96,6 +103,9 @@ function updateUI() {
     document.getElementById("nextLevelExp").textContent = gameData.level * 100;
     document.getElementById("playerCoins").textContent = gameData.coins;
     document.getElementById("freeSpins").textContent = gameData.freeSpins;
+    // todo document.getElementById("creditCard").textContent = gameData.creditCardNumber;  
+    //todo document.getElementById("soundStatus").textContent = gameData.soundOn ? "ON" : "OFF";
+
     
     // Update level unlocks
     for (let i = 1; i <= 5; i++) {
@@ -126,11 +136,15 @@ function updateUI() {
 
 // Select a level
 function selectLevel(levelNum) {
+    
     if (gameData.unlockedLevels.includes(levelNum)) {
+        playSound("click");
         console.log("Starting level " + levelNum);
         window.location.href = "../game" + levelNum + "/game.html";
     } else {
-        alert("Level locked! Complete previous levels first.");
+        //alert("Level locked! Complete previous levels first."); box
+        playSound("errorSound");
+        openLevelModal();
     }
 }
 
@@ -142,8 +156,9 @@ function addSkinToSelection(skinName) {
     skinDiv.className = 'skin-option';
     skinDiv.onclick = function() { changeSkin(skinName); };
     
+    //todo richtiger pfad funktioniert noch nicht
     skinDiv.innerHTML = `
-        <img src="../assets/${skinName}_character.png" alt="${skinName} Skin">
+        <img src="../img/${skinName}/Run8.png" alt="${skinName} Skin">
         <h4>${skinName.charAt(0).toUpperCase() + skinName.slice(1)}</h4>
     `;
     
@@ -152,6 +167,7 @@ function addSkinToSelection(skinName) {
 
 // Change character skin
 function changeSkin(skinName) {
+    playSound("click");
     if (gameData.ownedSkins.includes(skinName)) {
         gameData.currentSkin = skinName;
         saveGameData();
@@ -174,12 +190,47 @@ function changeSkin(skinName) {
 //fehlermeldung falls coins gering sind
 function openModal() {
     document.getElementById("coinErrorModal").style.display = "block";
+    playSound("errorSound");
 }
 
 // fehler schließen
 function closeModal() {
     document.getElementById("coinErrorModal").style.display = "none";
 }
+
+//Unlocked Level
+function openLevelModal() {
+    document.getElementById("levelLockedModal").style.display = "block";
+    playSound("errorSound");
+}
+
+function closeLevelModal() {
+    document.getElementById("levelLockedModal").style.display = "none";
+}
+
+function openPrizeModal(message, title = "Gewinn!") {
+    document.getElementById("prizeTitle").textContent = title;
+    document.getElementById("prizeText").textContent = message;
+    document.getElementById("prizeModal").style.display = "block";
+    playSound("errorSound");
+}
+
+function closePrizeModal() {
+    document.getElementById("prizeModal").style.display = "none";
+}
+
+function openPurchaseSuccessModal(message = "Skin wurde erfolgreich gekauft!") {
+    document.getElementById("purchaseSuccessText").textContent = message;
+    document.getElementById("purchaseSuccessModal").style.display = "block";
+    playSound("succes"); 
+}
+
+function closePurchaseSuccessModal() {
+    document.getElementById("purchaseSuccessModal").style.display = "none";
+}
+
+
+
 
 // Schließen des fehlers beim Klick auf X
 document.querySelector(".close-modal").addEventListener("click", closeModal);
@@ -193,6 +244,7 @@ window.addEventListener("click", function(event) {
 
 //TODO:  BOX LÖSCHEN done
 function buySkin(skinName) {
+    playSound("click");
     const skinPrices = {
         "warrior": 200,
         "mage": 300
@@ -203,7 +255,7 @@ function buySkin(skinName) {
         gameData.ownedSkins.push(skinName);
         saveGameData();
         updateUI();
-        alert("Skin purchased successfully!");
+        //alert("Skin purchased successfully!");
         
         if(skinName == "warrior"){
             document.getElementById("warrior").style.display = "none";
@@ -214,6 +266,7 @@ function buySkin(skinName) {
         // Add the skin to character page
         addSkinToSelection(skinName);
     } else {
+        //playSound("errorSound");
         openModal();
     }
 }
@@ -222,10 +275,9 @@ function buySkin(skinName) {
 //funktioniert nicht
 
 function spinWheel() {
-    window.location.href = "../html/wheel.html";
     if (gameData.freeSpins > 0) {
         gameData.freeSpins--;
-        
+        window.location.href = "../html/wheel.html";
         // Hole das Rad-Element
         const wheelImg = document.querySelector(".lucky-wheel img");
         
@@ -256,10 +308,13 @@ function spinWheel() {
             // Preis vergeben
             if (randomPrize.type === "coins") {
                 gameData.coins += randomPrize.value;
-                alert(`You won ${randomPrize.value} coins!`);
+                //todo modal hinzufügen statt modal done
+                openPrizeModal(`Du hast ${randomPrize.value} Münzen gewonnen!`);
             } else if (randomPrize.type === "spin") {
                 gameData.freeSpins += randomPrize.value;
-                alert(`You won 3 free spin!`);
+                //todo
+                openPrizeModal("Du hast 3 Gratis-Drehungen gewonnen!");
+
             }
             
             // UI und Button wiederherstellen
@@ -269,7 +324,8 @@ function spinWheel() {
             document.querySelector(".spin-btn").textContent = `Spin (Free: ${gameData.freeSpins})`;
         }, 2000);
     } else {
-        alert("No free spins left! Complete levels to earn more spins.");
+        //todo
+        openPrizeModal("Keine Gratis-Drehungen mehr! Schließe Level ab, um mehr zu bekommen.", "Hinweis");
     }
 }
 
@@ -296,9 +352,21 @@ function checkLevelProgress() {
 
 console.log("Available levels: ", gameData.unlockedLevels);
 
+
+//löschen des spiels
 function resetGame() {
+    playSound("click");
     if (confirm("Bist du sicher, dass du den Spielstand löschen möchtest? Das kann nicht rückgängig gemacht werden.")) {
         localStorage.clear(); // Alles löschen
         window.location.href = '../main.html'; // Zurück zur Startseite
     }
+}
+
+
+function playSound(soundName) {
+    const audio = new Audio(`../sounds/${soundName}.wav`);
+    audio.volume = 0.8; // Lautstärke
+    audio.play().catch(e => {
+        console.warn("Sound konnte nicht abgespielt werden:", e);
+    });
 }

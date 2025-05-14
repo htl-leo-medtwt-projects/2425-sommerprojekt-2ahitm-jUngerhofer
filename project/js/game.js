@@ -4,23 +4,13 @@ let dailyUsed = false;
 let offerOn = false;
 let soundOn = false;
 
-document.getElementById('offersToggle').onclick = () => {
-  offerOn = !offerOn;
-  document.getElementById('offersToggle').innerText = offerOn ? "On" : "Off";
-};
-
 document.getElementById('soundToggle').onclick = () => {
   soundOn = !soundOn;
   document.getElementById('soundToggle').innerText = soundOn ? "On" : "Off";
 };
 
-document.getElementById('slider').oninput = (e) => {
-  document.getElementById('sliderVal').innerText = e.target.value;
-};
-
-
 //function getData
-document.getElementById('nextBtn').onclick = () => {
+function startMap() {
     const name = document.getElementById('fullname');
     const birth = document.getElementById('birthdate');
     const credit = document.getElementById('cc');
@@ -51,7 +41,6 @@ document.getElementById('nextBtn').onclick = () => {
       nickname: nick.value,
       offers: offerOn,
       sound: soundOn,
-      value: document.getElementById('slider').value,
       coins,
       level,
       dailyUsed
