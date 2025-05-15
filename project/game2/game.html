@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory Spiel</title>
     <link rel="stylesheet" href="game.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="game.js" defer></script>
 </head>
 <body>
@@ -21,7 +22,7 @@
     </div>
 
     <div id="rules-container">
-        <div class="close-button" id="close-rules">✖</div>
+        <div class="close-button" id="close-rules" onclick="leaveBack()">✖</div>
         <h2>Card Chaos:</h2>
         <ul>
             <li>Finde alle 10 Kartenpaare</li>
@@ -43,6 +44,20 @@
         <h2 id="game-over-message"></h2>
         <p id="game-over-stats"></p>
         <button id="restart-button">Zurück zur Lobby</button>
+        <button id="start-gambling" style="margin-top: 1rem;">Versuche dein Glück</button>
     </div>
+
+    <div id="gamblingMachine" style="display: none; text-align: center;">
+        <h2>Gamble deine Belohnung!</h2>
+        <div class="slotContainer">
+            <div class="slot" id="slot1">❓</div>
+            <div class="slot" id="slot2">❓</div>
+            <div class="slot" id="slot3">❓</div>
+        </div>
+        <button id="gambleButton">Spin</button>
+        <p id="winnings"></p>
+        <p id="spinsLeft">Versuche übrig: 5</p>
+    </div>
+    
 </body>
 </html>

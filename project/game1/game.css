@@ -101,7 +101,7 @@ h1 {
     position: absolute;
     width: 100px;
     height: 60px;
-    background-image: url('../img/fass.jpg');
+    background-image: url('../img/fass.png');
     background-size: cover;
     bottom: 100px;
     display: none;
@@ -120,7 +120,7 @@ h1 {
 }
 
 .coin {
-    background-image: url('../img/coin.jpg');
+    background-image: url('../img/coin.png');
 }
 
 .dangerous {

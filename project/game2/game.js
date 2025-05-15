@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+
     const startScreen = document.getElementById('start-screen');
     const playButton = document.getElementById('play-button');
     const rulesContainer = document.getElementById('rules-container');
@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let pairsFound = 0;
     let totalFlips = 0;
     
-    // Emoji für die Karten
-    const emojis = ["🐱", "🐶", "🐭", "🐰", "🦊", "🐻", "🐼", "🐨", "🦁", "🐯"];
+    // Emoji der karten
+    const emojis = ["🗺️", "🪙", "🎲", "🎰", "🧭", "💰", "🧱", "🧙‍♂️", "🏴‍☠️", "📦"];
     
     // Play Button Klick
     playButton.addEventListener('click', function() {
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     }
     
-    // Zeit formatieren (MM:SS)
+    // Zeit 
     function formatTime(seconds) {
         const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
         const secs = (seconds % 60).toString().padStart(2, '0');
@@ -210,4 +210,121 @@ document.addEventListener('DOMContentLoaded', function() {
         
         console.log(`Level ${levelNumber} als abgeschlossen markiert!`);
     }
+
+
+function leaveBack(){
+    window.location.href = "../html/map.html"
+}
+
+document.getElementById("start-gambling").addEventListener("click", function () {
+    document.getElementById("gamblingMachine").style.display = "block";
+    document.getElementById("game-over-container").style.display = "none";
+    this.disabled = true; // Button deaktivieren, damit man es nicht mehrfach startet
 });
+
+let spinsLeft = 5;
+let coinCount = 0;
+
+document.getElementById("gambleButton").addEventListener("click", spin);
+
+function spin() {
+    if (spinsLeft <= 0) {
+        document.getElementById("winnings").textContent = "Keine Versuche mehr übrig!";
+        endGambling(); // ➕
+        return;
+    }
+
+    spinsLeft--;
+    document.getElementById("spinsLeft").textContent = `Versuche übrig: ${spinsLeft}`;
+
+    const symbols = ["🪙", "💎", "⭐", "🎰", "🎁"];
+    const slots = [
+        document.getElementById("slot1"),
+        document.getElementById("slot2"),
+        document.getElementById("slot3")
+    ];
+
+    document.getElementById("gambleButton").disabled = true;
+
+    // 🌀 Animation starten
+    slots.forEach(slot => {
+        gsap.fromTo(slot, 
+            { scale: 1, rotation: 0 }, 
+            { scale: 1.4, rotation: 360, duration: 0.4, ease: "power2.inOut" }
+        );
+    });
+
+    setTimeout(() => {
+        let finalSymbols = [];
+        for (let i = 0; i < 3; i++) {
+            const symbolIndex = Math.floor(Math.random() * symbols.length);
+            finalSymbols.push(symbols[symbolIndex]);
+            slots[i].textContent = symbols[symbolIndex];
+            slots[i].dataset.symbol = symbols[symbolIndex];
+
+            // 🌀 Finales Einrasten
+            gsap.to(slots[i], { scale: 1, rotation: 0, duration: 0.3, ease: "back.out(1.7)" });
+        }
+
+        checkWin();
+
+        if (spinsLeft <= 0) {
+            setTimeout(endGambling, 1500); 
+        } else {
+            document.getElementById("gambleButton").disabled = false;
+        }
+    }, 700); 
+}
+
+function endGambling() {
+    document.getElementById("winnings").textContent += " Glücksspiel beendet!";
+    document.getElementById("gamblingMachine").style.display = "none";
+    document.getElementById("gamblingMachine").style.display = "none";
+    document.getElementById("game-over-container").style.display = "block";
+
+    document.getElementById("start-gambling").disabled = false;
+
+    spinsLeft = 5;
+}
+
+
+
+function checkWin() {
+    const s1 = document.getElementById("slot1").dataset.symbol;
+    const s2 = document.getElementById("slot2").dataset.symbol;
+    const s3 = document.getElementById("slot3").dataset.symbol;
+
+    if (s1 === s2 && s2 === s3) {
+        let winAmount = 0;
+        switch (s1) {
+            case "🪙": winAmount = 10; break;
+            case "💎": winAmount = 50; break;
+            case "⭐": winAmount = 20; break;
+            case "🎰": winAmount = 100; break;
+            case "🎁": winAmount = 30; break;
+        }
+        coinCount += winAmount;
+        document.getElementById("winnings").textContent = `🎉 Gewinn: ${winAmount} Münzen!`;
+        addCoinsToStorage(winAmount); // ✅ Münzen speichern
+        
+    } else {
+        document.getElementById("winnings").textContent = "Leider kein Gewinn.";
+    }
+}
+
+
+function addCoinsToStorage(coins) {
+    const currentCoins = parseInt(localStorage.getItem('playerCoins')) || 0;
+    const newTotal = currentCoins + coins;
+    localStorage.setItem('playerCoins', newTotal);
+    console.log(`Neue Münzanzahl gespeichert: ${newTotal}`);
+}
+
+//für console zum skippen
+window.skipGameAndWin = function() {
+    clearInterval(timer); // Timer stoppen
+    pairsFound = 10; 
+    totalFlips = 20;
+    endGame(true); 
+    console.log("Spiel wurde übersprungen und als gewonnen markiert.");
+};
