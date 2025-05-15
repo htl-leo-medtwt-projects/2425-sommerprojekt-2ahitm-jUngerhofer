@@ -43,9 +43,12 @@ function openCharacter() {
 }
 
 // Game data
-let skibidi = localStorage.getItem('playerData');
+let skibidi = JSON.parse(localStorage.getItem('playerData'));
+
+console.log(skibidi);
+console.log(skibidi.name)
 let gameData = {
-    playerName: localStorage.getItem("name"),
+    playerName: skibidi.name,
     nickname: skibidi.nickname,
     level: 1,
     experience: 0,
@@ -58,6 +61,8 @@ let gameData = {
     soundOn: localStorage.getItem("sound")
 };
 
+console.log(gameData);
+document.getElementById("playerName").innerHTML = skibidi.nickname;
 
 
 
@@ -97,10 +102,11 @@ function saveGameData() {
     localStorage.setItem('gameData', JSON.stringify(gameData));
 }
 
+
 // Update UI with current game data
 function updateUI() {
     // Spielerdaten anzeigen
-    document.getElementById("playerName").textContent= gameData.playerName;
+    document.getElementById("playerName").textContent= skibidi.name;
     document.getElementById("playerLevel").textContent = gameData.level;
     document.getElementById("playerExp").textContent = gameData.experience;
     document.getElementById("nextLevelExp").textContent = gameData.level * 100;
