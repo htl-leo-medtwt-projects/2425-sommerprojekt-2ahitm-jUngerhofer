@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Level 3 - Timer Minigame & Gambling</title>
+<link rel="stylesheet" href="game.css">
+<script src="game.js" defer></script>
+</head>
+<body>
+
+  <div id="gameContainer">
+
+    <!-- Level Status -->
+    <div id="levelStatus">Timer Level: 1/3</div>
+  
+    <!-- Vorspann mit Regeln -->
+    <div id="startScreen">
+      <h1>Level 3 - Timer Minigame</h1>
+      <p>Timer-Minigame Regeln:</p>
+      <ul>
+        <li>Animation → 1 Sekunde Zeitanzeige → unsichtbarer Timer</li>
+        <li>Leertaste drücken, wenn du denkst der Timer ist bei 0</li>
+        <li>Toleranz: ±0,5 Sekunden</li>
+      </ul>
+      <button id="startButton">Spiel starten</button>
+    </div>
+  
+    <!-- Animation Screen -->
+    <div id="animationScreen">
+      <div class="animationContent">
+        <div class="animationImage">Bild Platzhalter</div>
+        <p>Bereite dich vor...</p>
+      </div>
+    </div>
+  
+    <!-- Timer Minigame -->
+    <div id="timerDisplay"></div>
+    <div id="message"></div>
+    <div id="instructions">Leertaste = Stopp</div>
+  
+    <!-- Gambling Automat -->
+    <div id="gamblingMachine">
+      <h2>Gamble your Coins!</h2>
+      <div class="slotContainer">
+        <div class="slot" id="slot1">?</div>
+        <div class="slot" id="slot2">?</div>
+        <div class="slot" id="slot3">?</div>
+      </div>
+      <button id="gambleButton">Spin</button>
+      <p id="winnings"></p>
+      <p id="spinsLeft">Versuche übrig: 5</p>
+    </div>
+  
+  </div>
+</body>
+</html>

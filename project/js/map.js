@@ -57,8 +57,8 @@ let gameData = {
     ownedSkins: ["NoSkin"],
     currentSkin: "NoSkin",
     freeSpins: 1,
-    creditCardNumber: localStorage.getItem("creditCard"), 
-    soundOn: localStorage.getItem("sound")
+    creditCardNumber: skibidi.creditCardNumber, 
+    soundOn: skibidi.soundOn
 };
 
 console.log(gameData);
