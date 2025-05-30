@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Level 3 - Timer Minigame & Gambling</title>
 <link rel="stylesheet" href="game.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="game.js" defer></script>
 </head>
 <body>
@@ -39,18 +40,25 @@
     <div id="message"></div>
     <div id="instructions">Leertaste = Stopp</div>
   
-    <!-- Gambling Automat -->
     <div id="gamblingMachine">
       <h2>Gamble your Coins!</h2>
       <div class="slotContainer">
-        <div class="slot" id="slot1">?</div>
-        <div class="slot" id="slot2">?</div>
-        <div class="slot" id="slot3">?</div>
+          <div class="slot" id="slot1">?</div>
+          <div class="slot" id="slot2">?</div>
+          <div class="slot" id="slot3">?</div>
       </div>
-      <button id="gambleButton">Spin</button>
+      <button id="gambleButton" onclick="spin()">Spin</button>
       <p id="winnings"></p>
       <p id="spinsLeft">Versuche übrig: 5</p>
-    </div>
+  </div>
+  
+  <div id="gameOver">
+      <h2>Spiel beendet!</h2>
+      <p id="finalScore">Items gesammelt: 0/15</p>
+      <p id="finalCoins">Münzen gesammelt: 0</p>
+      <p id="finalExperience">Erfahrung erhalten: 0</p>
+      <button id="restartButton" onclick="restartGame()">Zurück zur Lobby</button>
+  </div>
   
   </div>
 </body>

@@ -188,9 +188,115 @@ const levels = [4, 7, 12]; // Sekunden Timer
     startLevel(currentLevel);
   });
 
+  function showGamblingMachine() {
+    gamePhase = "gambling";
+    clearInterval(timerInterval); // Timer stoppen
+    document.getElementById("gamblingMachine").style.display = "block";
+}
+
+// Gambling Machine
+function spin() {
+    if (spinsLeft <= 0) {
+        document.getElementById("winnings").textContent = "Keine Versuche mehr übrig!";
+        window.location.href = "../html/map.html";
+        return;
+    }
+    
+    spinsLeft--;
+    document.getElementById("spinsLeft").textContent = `Versuche übrig: ${spinsLeft}`;
+    
+    const symbols = ["🪙", "💎", "⭐", "🎰", "🎁"];
+    const slots = [
+        document.getElementById("slot1"),
+        document.getElementById("slot2"),
+        document.getElementById("slot3")
+    ];
+    
+    //diable button während gedrhet wird => verhinderung doppeltes drehen
+    document.getElementById("gambleButton").disabled = true;
+    
+    // Kurze Animation mit GSAP
+    //GSAP für Gambling
+    gsap.to(slots, {
+        rotation: 360,
+        duration: 0.5,
+        ease: "power1.inOut",
+        onComplete: function() {
+            let finalSymbols = [];
+            
+            for (let i = 0; i < 3; i++) {
+                const symbolIndex = Math.floor(Math.random() * symbols.length);
+                finalSymbols.push(symbols[symbolIndex]);
+                slots[i].textContent = symbols[symbolIndex];
+                slots[i].dataset.symbol = symbols[symbolIndex];
+            }
+            
+            gsap.set(slots, { rotation: 0 });
+            
+            checkWin();
+            
+            // beenden wenn spins 0 ergeben
+            if (spinsLeft <= 0) {
+                completeLevel(); //wenn alle spins fertig sind weird das Spiel ebenso auf erfolgreich geranked
+                setTimeout(endGame, 2000);
+            }
+        }
+    });
+}
+
+// Prüfen, ob Gewinn
+function checkWin() {
+    const slots = [
+        document.getElementById("slot1"),
+        document.getElementById("slot2"),
+        document.getElementById("slot3")
+    ];
+    
+    const symbols = slots.map(slot => slot.dataset.symbol);
+    
+    // Alle gleich?
+    if (symbols[0] === symbols[1] && symbols[1] === symbols[2]) {
+        // Gewinn!
+        let winAmount = 0;
+        
+        // Je nach Symbol unterschiedliche Beträge
+        switch (symbols[0]) {
+            case "🪙": winAmount = 10; break;
+            case "💎": winAmount = 50; break;
+            case "⭐": winAmount = 20; break;
+            case "🎰": winAmount = 100; break;
+            case "🎁": winAmount = 30; break;
+        }
+        
+        document.getElementById("winnings").textContent = `Gewonnen: ${winAmount} Münzen!`;
+        
+        // Münzen zum Spielstand hinzufügen
+        coinCount += winAmount;
+        document.getElementById("coins").textContent = `Münzen: ${coinCount}`;
+        
+        // Münzen zum localStorage hinzufügen
+        const storedCoins = localStorage.getItem("playerCoins") || "0";
+        localStorage.setItem("playerCoins", parseInt(storedCoins) + winAmount);
+        
+        // GSAP Animation für den Gewinn
+        // Kommentar: GSAP für die Animation des Gewinntextes
+        gsap.from("#winnings", {
+            scale: 0,
+            duration: 0.5,
+            ease: "back.out(1.7)"
+        });
+        
+    } else {
+        document.getElementById("winnings").textContent = "Leider kein Gewinn.";
+    }
+    
+    
+    document.getElementById("gambleButton").disabled = false;
+}
 
   gambleButton.addEventListener('click', () => {
-    if (spinsLeft <= 0) {
+    showGamblingMachine();
+    /*if (spinsLeft <= 0) {
       winnings.textContent = 'Keine Versuche mehr!';
       return;
     }
@@ -230,7 +336,7 @@ const levels = [4, 7, 12]; // Sekunden Timer
           }, 3000);
         }, 2000);
       }
-    }, 1000);
+    }, 1000);*/
   });
 
   function completeLevel() {

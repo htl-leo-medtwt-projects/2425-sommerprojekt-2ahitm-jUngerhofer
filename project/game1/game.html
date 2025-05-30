@@ -1,346 +1,62 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Level 3 - Timer Minigame & Gambling</title>
-<style>
-  /* --- Basis Stil vom ersten Level (angepasst) --- */
-  @import url('https://fonts.cdnfonts.com/css/amy');
-
-  body {
-    margin: 0; padding: 0;
-    font-family: 'Amy', sans-serif;
-    background-color: rgba(6, 193, 6, 0.575);
-    color: white;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-
-  #gameContainer {
-    width: 800px;
-    height: 600px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    background: linear-gradient(to top, #145214, #2ea437);
-    border-radius: 20px;
-  }
-
-  /* Vorspann mit Regeln */
-  #startScreen {
-    position: absolute;
-    width: 100%; height: 100%;
-    background-image: url('../img/lvl1Background.png');
-    background-size: cover;
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
-    text-align: center;
-    padding: 20px;
-    z-index: 20;
-  }
-  #startScreen h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-  }
-  #startScreen p {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-  }
-  #startScreen ul {
-    text-align: left;
-    margin: 1rem auto 2rem;
-    max-width: 500px;
-    font-size: 1.1rem;
-    line-height: 1.5;
-  }
-  #startScreen button {
-    background: #ffcc00;
-    color: #000;
-    border: none;
-    padding: 1rem 3rem;
-    font-size: 1.5rem;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 0 10px #ffcc00;
-    transition: transform 0.2s ease;
-  }
-  #startScreen button:hover {
-    transform: scale(1.05);
-  }
-
-  /* Timer Anzeige */
-  #timerDisplay {
-    font-size: 100px;
-    font-weight: 900;
-    color: red;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    user-select: none;
-  }
-
-  /* Nachricht */
-  #message {
-    position: absolute;
-    bottom: 60px;
-    width: 100%;
-    text-align: center;
-    font-size: 28px;
-    font-weight: 700;
-    color: white;
-  }
-
-  #instructions {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    font-size: 18px;
-    color: #ddd;
-    text-align: center;
-  }
-
-  /* Gambling Maschine */
-  #gamblingMachine {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    height: 300px;
-    background-color: #3a2a52;
-    border: 4px solid gold;
-    border-radius: 10px;
-    z-index: 20;
-    text-align: center;
-    padding: 20px;
-  }
-  .slotContainer {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
-  }
-  .slot {
-    width: 80px;
-    height: 80px;
-    background-color: white;
-    border: 3px solid #333;
-    border-radius: 5px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-  }
-  #gambleButton {
-    background: #ffcc00;
-    color: #000;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  #spinsLeft {
-    margin-top: 10px;
-    font-size: 1.2rem;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sammelspiel</title>
+    <!-- GSAP-Bibliothek -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="game.css">
+    <script src="game.js" defer></script>
 </head>
 <body>
 
-<div id="gameContainer">
+    <div id="gameContainer">
+        <div id="startScreen">
+            <h1>Level 1 - Mytic Woods</h1>
+            <p class="subtitle">Sammle die Items und gewinne Münzen!</p>
+            <button class="startButton" onclick="startGame()">start</button>
+            <div id="controls"></div>
+        </div>
+        
+        <div id="entryPhase">
+            <h3 style="text-align: center; color: green;">Laufe in den Wald um das Spiel zu starten!</h3>
+            <div id="character"></div>
+            <div id="levelEntrance"></div>
+            <div id="controls"></div>
+        </div>
+        
+        <div id="gameScreen">
+            <div id="character"></div>
+            <div id="basket"></div>
+            <div id="score">Items: 0/15</div>
+            <div id="lives">Leben: 3</div>
+            <div id="coins">Münzen: 0</div>
+            <div id="experience">XP: 0</div>
+            <div id="timer">Zeit: 60</div>
+        </div>
+        
+        <div id="gamblingMachine">
+            <h2>Gamble your Coins!</h2>
+            <div class="slotContainer">
+                <div class="slot" id="slot1">?</div>
+                <div class="slot" id="slot2">?</div>
+                <div class="slot" id="slot3">?</div>
+            </div>
+            <button id="gambleButton" onclick="spin()">Spin</button>
+            <p id="winnings"></p>
+            <p id="spinsLeft">Versuche übrig: 5</p>
+        </div>
+        
+        <div id="gameOver">
+            <h2>Spiel beendet!</h2>
+            <p id="finalScore">Items gesammelt: 0/15</p>
+            <p id="finalCoins">Münzen gesammelt: 0</p>
+            <p id="finalExperience">Erfahrung erhalten: 0</p>
+            <button id="restartButton" onclick="restartGame()">Zurück zur Lobby</button>
+        </div>
 
-  <!-- Vorspann mit Regeln -->
-  <div id="startScreen">
-    <h1>Level 3 - Timer Minigame</h1>
-    <p>Hier sind die Regeln für das Timer-Minigame:</p>
-    <ul>
-      <li>Du siehst einen roten Timer in der Mitte (4, 7 oder 12 Sekunden).</li>
-      <li>Der Timer läuft runter und verschwindet.</li>
-      <li>Drücke die Leertaste, um zu raten, wann der Timer abgelaufen ist.</li>
-      <li>Dein Timing muss innerhalb von ±0,5 Sekunden genau sein.</li>
-      <li>Bei Erfolg geht es zum nächsten Timer.</li>
-      <li>Nach 3 erfolgreichen Stufen wartet der Gambling Automat auf dich!</li>
-    </ul>
-    <button id="startButton">Spiel starten</button>
-  </div>
-
-  <!-- Timer Minigame -->
-  <div id="timerDisplay"></div>
-  <div id="message"></div>
-  <div id="instructions">Drücke Leer-Taste, um zu raten</div>
-
-  <!-- Gambling Automat -->
-  <div id="gamblingMachine">
-    <h2>Gamble your Coins!</h2>
-    <div class="slotContainer">
-      <div class="slot" id="slot1">?</div>
-      <div class="slot" id="slot2">?</div>
-      <div class="slot" id="slot3">?</div>
     </div>
-    <button id="gambleButton">Spin</button>
-    <p id="winnings"></p>
-    <p id="spinsLeft">Versuche übrig: 5</p>
-  </div>
-
-</div>
-
-<script>
-  // --- Variables ---
-  const levels = [4, 7, 12]; // Sekunden Timer
-  let currentLevel = 0;
-
-  const startScreen = document.getElementById('startScreen');
-  const startButton = document.getElementById('startButton');
-
-  const timerDisplay = document.getElementById('timerDisplay');
-  const message = document.getElementById('message');
-  const instructions = document.getElementById('instructions');
-
-  const gamblingMachine = document.getElementById('gamblingMachine');
-  const gambleButton = document.getElementById('gambleButton');
-  const slot1 = document.getElementById('slot1');
-  const slot2 = document.getElementById('slot2');
-  const slot3 = document.getElementById('slot3');
-  const winnings = document.getElementById('winnings');
-  const spinsLeftDisplay = document.getElementById('spinsLeft');
-
-  let countdownStart = 0;
-  let countdownDuration = 0;
-  let timerVisible = true;
-  let animationFrameId;
-  let guessMade = false;
-
-  // Gambling Maschine
-  let spinsLeft = 5;
-
-  function startLevel(levelIndex) {
-    guessMade = false;
-    message.textContent = '';
-    countdownDuration = levels[levelIndex] * 1000;
-    countdownStart = performance.now();
-    timerVisible = true;
-    timerDisplay.style.color = 'red';
-    timerDisplay.style.fontWeight = '900';
-    timerDisplay.style.display = 'block';
-    instructions.style.display = 'block';
-    gamblingMachine.style.display = 'none';
-    drawTimer();
-  }
-
-  function drawTimer() {
-    animationFrameId = requestAnimationFrame(drawTimer);
-    const now = performance.now();
-    let elapsed = now - countdownStart;
-
-    if (timerVisible) {
-      let timeLeft = Math.max(0, countdownDuration - elapsed);
-      timerDisplay.textContent = (timeLeft / 1000).toFixed(2);
-      if (timeLeft <= 0) {
-        timerDisplay.textContent = '';
-        timerVisible = false;
-      }
-    }
-  }
-
-  function endGame(win) {
-    cancelAnimationFrame(animationFrameId);
-    instructions.style.display = 'none';
-    timerDisplay.style.display = 'none';
-
-    if (win) {
-      message.style.color = '#0f0';
-      message.textContent = `Glückwunsch! Alle Level geschafft!`;
-      // Gambling Maschine zeigen
-      gamblingMachine.style.display = 'block';
-      spinsLeft = 5;
-      spinsLeftDisplay.textContent = `Versuche übrig: ${spinsLeft}`;
-      winnings.textContent = '';
-    } else {
-      message.style.color = '#f00';
-      message.textContent = `Leider verloren! Du warst zu weit weg.`;
-      // Button zum neu starten zeigen (hier als einfaches reload)
-      startScreen.style.display = 'flex';
-    }
-  }
-
-  window.addEventListener('keydown', (e) => {
-    if (e.code === 'Space' && !guessMade && startScreen.style.display === 'none' && gamblingMachine.style.display === 'none') {
-      e.preventDefault();
-      guessMade = true;
-      const guessTime = performance.now();
-      const elapsed = guessTime - countdownStart;
-      const diff = Math.abs(elapsed - countdownDuration);
-
-      if (diff <= 500) {
-        currentLevel++;
-        if (currentLevel >= levels.length) {
-          cancelAnimationFrame(animationFrameId);
-          timerDisplay.style.display = 'none';
-          instructions.style.display = 'none';
-          message.style.color = '#0f0';
-          message.textContent = `Glückwunsch! Alle Level geschafft!`;
-          gamblingMachine.style.display = 'block';
-          spinsLeft = 5;
-          spinsLeftDisplay.textContent = `Versuche übrig: ${spinsLeft}`;
-          winnings.textContent = '';
-        } else {
-          timerDisplay.style.color = 'green';
-          timerDisplay.textContent = '✔';
-          instructions.style.display = 'none';
-          setTimeout(() => {
-            startLevel(currentLevel);
-          }, 1500);
-        }
-      } else {
-        endGame(false);
-      }
-    }
-  });
-
-  startButton.addEventListener('click', () => {
-    startScreen.style.display = 'none';
-    currentLevel = 0;
-    message.textContent = '';
-    startLevel(currentLevel);
-  });
-
-  // --- Gambling Maschine Spin Funktion ---
-  gambleButton.addEventListener('click', () => {
-    if (spinsLeft <= 0) {
-      winnings.textContent = 'Keine Versuche mehr!';
-      return;
-    }
-    spinsLeft--;
-    spinsLeftDisplay.textContent = `Versuche übrig: ${spinsLeft}`;
-
-    // Zufällige Zahlen für Slots (1-7)
-    const slotValues = [];
-    for (let i = 0; i < 3; i++) {
-      slotValues[i] = Math.floor(Math.random() * 7) + 1;
-    }
-    slot1.textContent = slotValues[0];
-    slot2.textContent = slotValues[1];
-    slot3.textContent = slotValues[2];
-
-    // Gewinne auswerten (z.B. alle drei gleich)
-    if (slotValues[0] === slotValues[1] && slotValues[1] === slotValues[2]) {
-      winnings.textContent = '🎉 Jackpot! Du hast gewonnen!';
-    } else {
-      winnings.textContent = 'Leider kein Gewinn, versuch es nochmal!';
-    }
-  });
-
-</script>
 
 </body>
 </html>
