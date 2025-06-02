@@ -41,7 +41,7 @@ function drawWheel() {
     ctx.fillText(segments[i].label, 180, 10);
     ctx.restore();
   }
-  // Zeichne den Zeiger
+  // Zeiger
   ctx.fillStyle = '#000';
   ctx.beginPath();
   ctx.moveTo(250, 50);

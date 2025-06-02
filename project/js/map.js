@@ -166,7 +166,7 @@ function addSkinToSelection(skinName) {
     skinDiv.className = 'skin-option';
     skinDiv.onclick = function() { changeSkin(skinName); };
     
-    //todo richtiger pfad funktioniert noch nicht
+    //todo richtiger pfad funktioniert noch nicht -> funktioneirt
     skinDiv.innerHTML = `
         <img src="../img/${skinName}/Run8.png" alt="${skinName} Skin">
         <h4>${skinName.charAt(0).toUpperCase() + skinName.slice(1)}</h4>

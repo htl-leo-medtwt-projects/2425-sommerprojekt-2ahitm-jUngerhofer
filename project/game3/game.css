@@ -80,11 +80,13 @@
   .animationContent {
     text-align: center;
     animation: pulse 2s ease-in-out infinite;
+
   }
 
   .animationImage {
     width: 200px;
     height: 200px;
+    
     background: rgba(255,255,255,0.3);
     border: 3px dashed #fff;
     border-radius: 10px;

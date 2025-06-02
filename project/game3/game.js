@@ -24,6 +24,9 @@ const levels = [4, 7, 12]; // Sekunden Timer
   let animationFrameId;
   let guessMade = false;
 
+  const animationImg = document.getElementsByClassName('animationImage');
+ // animationImg.style.backgroundImage = localStorage.getItem("currentSkin");
+
   // Gambling Maschine
   let spinsLeft = 5;
 

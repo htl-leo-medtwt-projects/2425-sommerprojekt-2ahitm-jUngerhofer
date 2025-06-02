@@ -230,7 +230,7 @@ document.getElementById("gambleButton").addEventListener("click", spin);
 function spin() {
     if (spinsLeft <= 0) {
         document.getElementById("winnings").textContent = "Keine Versuche mehr übrig!";
-        endGambling(); // ➕
+        endGambling(); // 
         return;
     }
 
