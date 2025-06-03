@@ -1,6 +1,6 @@
 // Game state variables
 let gameState = {
-    coins: 100,
+    coins: 150,
     experience: 0,
     totalWins: 0,
     totalSpins: 0,
@@ -8,19 +8,18 @@ let gameState = {
     isSpinning: false
 };
 
-// Slot symbols with different probabilities (harder to win)
+// Slot symbols with different probabilities
 const symbols = ['🍒', '🍋', '🍊', '🍇', '🔔', '💎', '⭐', '🎯'];
 const rarityWeights = [30, 25, 20, 15, 8, 5, 3, 2]; // More common symbols have higher weight
 const symbolValues = [15, 16, 17, 18, 20, 22, 24, 25]; // Payout values for each symbol
 
-// Winning lines (indices in the 3x4 grid) - only first 3 lines have HTML elements
 const winLines = [
     [4, 5, 6],      // Middle row (main horizontal line)
     [0, 5, 10],     // Diagonal top-left to bottom-right
     [2, 5, 8]       // Diagonal top-right to bottom-left
 ];
 
-// Create audio context for sound effects
+
 let audioContext;
 
 function initAudio() {
@@ -84,7 +83,7 @@ function updateDisplay() {
     document.getElementById('totalWins').textContent = gameState.totalWins;
     
     // Check for victory condition
-    if (gameState.coins >= 300 && gameState.isGameActive) {
+    if (gameState.coins >= 200 && gameState.isGameActive) {
         setTimeout(() => {
             showVictory();
         }, 1000);
@@ -113,6 +112,8 @@ function getRandomSymbol() {
 
 function pullLever() {
     if (gameState.isSpinning || gameState.coins < 10) return;
+
+    document.getElementById('rulesrules').style.display = "none;";
     
     const lever = document.getElementById('lever');
     lever.classList.add('pulled');
@@ -167,7 +168,7 @@ function spin() {
         winLines.forEach((line, lineIndex) => {
             const lineSymbols = line.map(index => results[index]);
             
-            // Only check for 3 matching symbols (no more 2-symbol wins)
+            // Only check symbols
             if (lineSymbols[0] === lineSymbols[1] && lineSymbols[1] === lineSymbols[2]) {
                 const symbolIndex = symbols.indexOf(lineSymbols[0]);
                 const winAmount = symbolValues[symbolIndex] || 15;
@@ -226,14 +227,16 @@ function showVictory() {
     const victoryStats = document.getElementById('victoryStats');
     
     victoryStats.innerHTML = `
-        <p><strong>🎯 Spins benötigt:</strong> ${gameState.totalSpins}</p>
-        <p><strong>🏆 Gewinne:</strong> ${gameState.totalWins}</p>
-        <p><strong>💰 Endmünzen:</strong> ${gameState.coins}</p>
-        <p><strong>⭐ Erfahrung:</strong> ${gameState.experience}</p>
+        <p><strong>Spins benötigt:</strong> ${gameState.totalSpins}</p>
+        <p><strong>Gewinne:</strong> ${gameState.totalWins}</p>
+        <p><strong>Endmünzen:</strong> ${gameState.coins}</p>
+        <p><strong>Erfahrung:</strong> ${gameState.experience}</p>
     `;
     
     victoryDiv.style.display = 'flex';
     playWinSound();
+    completeLevel();
+    updatePlayerProgress();
 }
 
 function showGameOver() {
@@ -242,11 +245,11 @@ function showGameOver() {
     const finalStats = document.getElementById('finalStats');
     
     finalStats.innerHTML = `
-        <p>🎯 Gesamte Spins: ${gameState.totalSpins}</p>
-        <p>🏆 Gesamte Gewinne: ${gameState.totalWins}</p>
-        <p>💰 Höchste Münzen: ${Math.max(gameState.coins, 100)}</p>
-        <p>⭐ Gesammelte Erfahrung: ${gameState.experience}</p>
-        <p>📊 Gewinnrate: ${gameState.totalSpins > 0 ? Math.round((gameState.totalWins / gameState.totalSpins) * 100) : 0}%</p>
+        <p>Gesamte Spins: ${gameState.totalSpins}</p>
+        <p>Gesamte Gewinne: ${gameState.totalWins}</p>
+        <p>Höchste Münzen: ${Math.max(gameState.coins, 100)}</p>
+        <p>Gesammelte Erfahrung: ${gameState.experience}</p>
+        <p>Gewinnrate: ${gameState.totalSpins > 0 ? Math.round((gameState.totalWins / gameState.totalSpins) * 100) : 0}%</p>
     `;
     
     gameOverDiv.style.display = 'flex';
@@ -277,12 +280,45 @@ function restartGame() {
     document.getElementById('gameOver').style.display = 'none';
     document.getElementById('victoryScreen').style.display = 'none';
     
+    window.location = "../html/map.html";
+
     updateDisplay();
 }
 
-// Initialize game
 createSlots();
 updateDisplay();
 
-// Enable audio on first user interaction
+
 document.addEventListener('click', initAudio, { once: true });
+
+function completeLevel() {
+    // Extrahiere die Level-Nummer aus der URL
+    const pathSegments = window.location.pathname.split('/');
+    const gameFolder = pathSegments[pathSegments.length - 2]; // z.B. "game1"
+    const levelNumber = parseInt(gameFolder.replace('game', '')) || 1;
+    
+    // Markieren das das Level erfolgreich weurd
+    localStorage.setItem(`level${levelNumber}Completed`, 'true');
+    
+    console.log(`Level ${levelNumber} als abgeschlossen markiert!`);
+}
+function updatePlayerProgress() {
+    let gameData = JSON.parse(localStorage.getItem('gameData') || '{}');
+    
+    if (!gameData.coins) gameData.coins = 0;
+    if (!gameData.experience) gameData.experience = 0;
+    if (!gameData.level) gameData.level = 1;
+    
+    // Münzen und Erfahrung aktualisieren
+    gameData.coins += coinCount;
+    gameData.experience += experience;
+                
+    const expNeededForNextLevel = gameData.level * 100;
+    if (gameData.experience >= expNeededForNextLevel) {
+        gameData.level += 1;
+    }
+    
+    localStorage.setItem('gameData', JSON.stringify(gameData));
+    
+    console.log(`Fortschritt aktualisiert: Level ${gameData.level}, XP ${gameData.experience}, Münzen ${gameData.coins}`);
+}

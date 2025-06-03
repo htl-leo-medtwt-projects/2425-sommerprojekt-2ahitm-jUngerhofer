@@ -13,7 +13,7 @@
         
         <div class="stats">
             <div class="stat-item">
-                <div class="stat-value" id="coins">100</div>
+                <div class="stat-value" id="coins">150</div>
                 <div class="stat-label">Münzen</div>
             </div>
             <div class="stat-item">
@@ -26,10 +26,10 @@
             </div>
         </div>
 
-        <div class="rules">
+        <div class="rules" id="rulesrules">
             <strong>Spielregeln:</strong> Ziehe den Hebel für 10 Münzen pro Spin. 
-            <br>🎯 <strong>Ziel:</strong> Erreiche 300 Münzen um zu gewinnen!
-            <br>💰 3 gleiche Symbole nebeneinander = 15-25 Münzen (je nach Seltenheit)
+            <br><strong>Ziel:</strong> Erreiche 200 Münzen um zu gewinnen!
+            <br>3 gleiche Symbole nebeneinander = 15-25 Münzen (je nach Seltenheit)
         </div>
 
         <div class="paylines">
@@ -61,21 +61,21 @@
 
     <div class="victory-screen" id="victoryScreen">
         <div class="victory-content">
-            <h2>🏆 GEWONNEN! 🏆</h2>
+            <h2>GEWONNEN!</h2>
             <p style="font-size: 1.5rem; margin: 20px 0;">
                 Herzlichen Glückwunsch!<br>
-                Du hast 200 Münzen erreicht!
+                Nun hast du das gesamte Spiel erfolgreich abgeschlossen!
             </p>
             <div id="victoryStats" style="margin: 20px 0;"></div>
-            <button class="restart-button" onclick="restartGame()">Nochmal spielen</button>
+            <button class="restart-button" onclick="restartGame()">Lobby</button>
         </div>
     </div>
 
     <div class="game-over" id="gameOver">
         <div class="game-over-content">
-            <h2>💸 Pleite! 💸</h2>
+            <h2>Pleite!</h2>
             <p id="finalStats"></p>
-            <button class="restart-button" onclick="restartGame()">Neues Spiel starten</button>
+            <button class="restart-button" onclick="restartGame()">Lobby</button>
         </div>
     </div>
 </body>
