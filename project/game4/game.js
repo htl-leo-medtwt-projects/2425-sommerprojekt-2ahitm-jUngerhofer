@@ -250,6 +250,8 @@ function actuallyStartGame() {
     gamePhase = "game";
 
     document.body.style.backgroundImage = "url('../img/höhleLvl4.webp')";
+    document.getElementById('gameScreen').style.backgroundImage = "url('../img/img4LvlInside.webp)";
+    document.getElementById('gameScreen').style.backgroundSize = "cover;";
     document.body.style.backgroundSize = "cover;";
 
     setupKeyboardControls();
