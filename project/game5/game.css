@@ -5,7 +5,9 @@
 }
 
 body {
-    background: url('https://media.giphy.com/media/3oKIPnbKgN3bXeVpvy/giphy.gif') center/cover no-repeat fixed;
+    background-image: url(../img/casinoBackground.png);
+    background-size: cover;
+    background-repeat: no-repeat;
     font-family: 'Arial', sans-serif;
     min-height: 100vh;
     display: flex;
@@ -13,6 +15,7 @@ body {
     align-items: center;
     color: white;
     position: relative;
+    overflow: hidden;
 }
 
 body::before {
@@ -27,9 +30,9 @@ body::before {
 }
 
 .game-container {
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.557);
     border-radius: 20px;
-    padding: 30px;
+    padding: 10px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
     text-align: center;
     max-width: 800px;
