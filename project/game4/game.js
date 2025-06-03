@@ -248,7 +248,10 @@ function showCountdown() {
 
 function actuallyStartGame() {
     gamePhase = "game";
-    
+
+    document.body.style.backgroundImage = "url('../img/höhleLvl4.webp')";
+    document.body.style.backgroundSize = "cover;";
+
     setupKeyboardControls();
     startTimer();
     startGeneratingBalls();
