@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Match - Minispiel</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="game.css">
+    <script src="game.js" defer></script>
+</head>
+<body>
+    <div id="startScreen">
+        <h1>Color Match</h1>
+        <p class="subtitle">Bewege die Bälle in die richtige Farbzone!</p>
+        <button class="startButton" onclick="startGame()">Spiel Starten</button>
+    </div>
+
+    <div id="entryPhase">
+        <div id="character"></div>
+        <div id="levelEntrance">ENTER<br>GAME</div>
+        <div id="entryInstructions">
+            Laufe in den Eingang! (WASD oder Pfeiltasten)
+        </div>
+    </div>
+
+    <div id="counter">3</div>
+
+    <div id="gameScreen">
+        <div id="ui">
+            <div class="uiElement" id="score">Punkte: 0</div>
+            <div class="uiElement" id="lives">Leben: 3</div>
+            <div class="uiElement" id="coins">Münzen: 0</div>
+            <div class="uiElement" id="experience">XP: 0</div>
+        </div>
+        
+        <div id="timer">Zeit: 45</div>
+        
+        <div id="colorZones">
+            <div class="colorZone red" data-color="red"></div>
+            <div class="colorZone blue" data-color="blue"></div>
+            <div class="colorZone green" data-color="green"></div>
+            <div class="colorZone yellow" data-color="yellow"></div>
+        </div>
+        
+        <div id="instructions">
+            Klicke auf einen Ball und bewege ihn mit den Pfeiltasten oder WASD in die richtige Farbzone!
+        </div>
+    </div>
+
+    <div id="gamblingMachine">
+        <h2>Gamble your Coins!</h2>
+        <div class="slotContainer">
+            <div class="slot" id="slot1">?</div>
+            <div class="slot" id="slot2">?</div>
+            <div class="slot" id="slot3">?</div>
+        </div>
+        <button id="gambleButton" onclick="spin()">Spin</button>
+        <p id="winnings"></p>
+        <p id="spinsLeft">Versuche übrig: 5</p>
+    </div>
+    
+    <div id="gameOver">
+        <h2>Spiel beendet!</h2>
+        <p id="finalScore">Punkte: 0</p>
+        <p id="finalCoins">Münzen gesammelt: 0</p>
+        <p id="finalExperience">Erfahrung erhalten: 0</p>
+        <button id="restartButton" onclick="restartGame()">Neues Spiel</button>
+    </div>
+</body>
+</html>
+
+            

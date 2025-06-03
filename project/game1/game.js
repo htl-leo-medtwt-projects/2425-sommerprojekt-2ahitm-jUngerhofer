@@ -520,8 +520,6 @@ function updatePlayerProgress() {
     const expNeededForNextLevel = gameData.level * 100;
     if (gameData.experience >= expNeededForNextLevel) {
         gameData.level += 1;
-        // Optional: Benachrichtigung über Level-Up
-        alert(`Level aufgestiegen! Du bist jetzt Level ${gameData.level}!`);
     }
     
     localStorage.setItem('gameData', JSON.stringify(gameData));
