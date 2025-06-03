@@ -381,3 +381,31 @@ function playSound(soundName) {
         console.warn("Sound konnte nicht abgespielt werden:", e);
     });
 }
+
+function openGameCompleteModal() {
+    document.getElementById("gameCompleteModal").style.display = "block";
+}
+
+function closeGameCompleteModal() {
+    document.getElementById("gameCompleteModal").style.display = "none";
+}
+
+function resetGameProgress() {
+    for (let i = 1; i <= 5; i++) {
+        localStorage.removeItem(`level${i}Completed`);
+    }
+    closeGameCompleteModal();
+    window.location = '../main.html';
+}
+
+let completedCount = 0;
+for (let i = 1; i <= 5; i++) {
+    if (localStorage.getItem(`level${i}Completed`) === 'true') {
+        completedCount++;
+    }
+}
+
+if (completedCount === 5) {
+    openGameCompleteModal();
+}
+
