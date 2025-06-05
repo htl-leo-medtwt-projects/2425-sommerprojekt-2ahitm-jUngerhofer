@@ -161,14 +161,27 @@ h1 {
 }
 
 #coins {
-    top: 50px;
+    top: 60px;
     left: 20px;
 }
 
 #experience {
-    top: 50px;
+    top: 60px;
     right: 20px;
 }
+
+#score, #lives, #coins, #experience, #timer {
+    position: absolute;
+    font-size: 1.5rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px; 
+    border-radius: 8px; 
+}
+
 
 #gamblingMachine {
     display: none;
