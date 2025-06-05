@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/amy');
+
 * {
     margin: 0;
     padding: 0;
@@ -8,7 +10,7 @@ body {
     background-image: url(../img/casinoBackground.png);
     background-size: cover;
     background-repeat: no-repeat;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Amy', sans-serif;
     min-height: 100vh;
     display: flex;
     justify-content: center;
